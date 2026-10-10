@@ -1,0 +1,96 @@
+@import url('../style/colors.css');
+/*
+footer .footer
+	div .footer-left
+		a .icon .nf .nf-cod-mail
+		a .icon .nf .nf-fa-discord
+	div .footer-right
+		a .icon .nf .nf-md-web
+		a .icon .nf .nf-linux-codeberg
+		a .icon .nf .nf-cod-github
+*/
+footer {
+	width: 100%;
+
+	
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	/* General properties for footer left and right */
+	.footer-left, .footer-right {
+		display: flex;
+		flex-flow: row nowrap;
+
+		gap: 10px; /*each element in footer's child has 10px gap*/
+
+		margin-bottom: 10px;
+
+		.icon {
+			font-size: 30px;
+			color: var(--w-fg);
+			/* Gives icon touch area 20px top and bottom */
+			padding: 20px 0;
+	
+			text-decoration: none;
+		}
+	
+		.icon:hover {
+			color: var(--sky-blue);
+			animation-name: moveUpDown;
+			animation-duration: 2s;
+			animation-delay: 0s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease;
+		}
+
+		.nf-cod-mail:hover {
+			color: #ffc8dd;
+		}
+		.nf-fa-discord:hover {
+			animation-name: rotate180;
+			animation-duration: 2s;
+			animation-delay: 0s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease;
+			color: #7289DA;
+		}
+		.nf-md-web:hover {
+			background-image: linear-gradient(to bottom, red, blue);
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+		}
+		.nf-linux-codeberg:hover {
+			color: #44ADFF;
+		}
+		.nf-cod-github:hover {
+			color: white;
+		}
+	}
+
+	.footer-left {
+		margin-left: 20px;
+	}
+	.footer-right {
+		margin-right: 20px;
+	}
+}
+
+@keyframes moveUpDown {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes rotate180 {
+	0%, 100% {
+		transform: rotateZ(0);
+	}
+	50% {
+		transform: rotateZ(180deg);
+	}
+}

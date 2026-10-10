@@ -1,0 +1,26 @@
+@property --w-bg {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #2c303fff;
+}
+@property --w-fg {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #b1c1ffff;
+}
+@property --w-bg-offset {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #434d67ff;
+}
+
+@property --sky-blue {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #C0FFFFFF;
+}
+@property --dark-blue {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #4f67adff;
+}

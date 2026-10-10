@@ -1,0 +1,89 @@
+@import url('../style/colors.css');
+/*
+header .navbar
+	div .left
+		a .button .guest
+	div .center
+		a .home
+			img
+		img .game-title
+		a .leaderboard
+			img
+	div .right
+		a .button .login
+		a .button .signup
+*/
+.navbar {
+	/*Stop user from being to select the elements in the navbar*/
+	user-select: none;
+
+
+	/*Anchor to SCREEN top and pin to front*/
+	z-index: 9999;
+	position: sticky;
+	top: 0;
+	left: 0;
+
+	/*Set width to take up 100% of body, and set height*/
+	min-width: 100%;
+	max-width: 100%;
+	max-height: 5rem;
+	/*Indlude padding in size*/
+	box-sizing: border-box;
+	padding: 10px;
+
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),  rgba(0, 0, 0, 0.5), transparent);
+	backdrop-filter: blur(6px);
+
+	/*
+	navar is a grid, where first and third column is 1 fraction and column 2 is the entire remaining width
+	[ column 1 ][   column 2   ][ column 3 ]
+	[    1fr   ][     auto     ][    1fr   ]
+	*/
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+
+	/*General settings for left, center and right portion of navbar*/
+	.left, .center, .right {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+
+		/*Set a gap of 10px between each elements in the navbar*/
+		gap: 10px;
+		.button {
+			font-style: normal;
+			font-size: 1rem;
+		}
+	}
+
+	/*Anchor divs to correct position*/
+	.left {justify-content: flex-start;}
+	.center {justify-content: center;}
+	.right {justify-content: flex-end;}
+
+	.center {
+		/*https://stackoverflow.com/questions/35782960/zoom-in-on-hover-image-and-keep-same-size*/
+		.home img, .leaderboard img {
+			display: block;
+			height: 2rem;
+			transition: 0.3s ease-in-out;
+		}
+		.home img:hover, .leaderboard img:hover {
+			transform: scale(1.2);
+		}
+		.home {
+			aspect-ratio: 52 / 65;
+		}
+		.game-title {
+			display: block;
+			margin: 0;
+			padding: 0;
+			max-height: 4rem;
+			aspect-ratio: 344 / 149;
+		}
+		.leaderboard {
+			aspect-ratio: 65 / 45;
+		}
+	}
+}

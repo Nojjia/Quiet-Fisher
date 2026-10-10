@@ -1,0 +1,167 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/iosevka@5.3.0/index.css');
+@import url('https://www.nerdfonts.com/assets/css/webfont.css');
+
+@import url('../style/colors.css');
+
+* {color: white;}
+
+body {
+	width: 100vw;
+	height: 100vh;
+
+	margin: 0;
+	padding: 0;
+
+	/*box-sizing: border-box;*/
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: var(--w-bg,#121212ff);
+}
+
+.main {
+	scrollbar-color: red;
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.main > .button {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: red;
+}
+
+.card {
+	max-width: 520px;
+
+	min-width: 100px;
+
+	background-color: var(--w-bg-offset, black);
+
+	border-radius: 10px;
+
+	font-family: 'Iosevka', monospace;
+	transition: filter 0.3s ease;
+
+	.account {
+		display: grid;
+		grid-template-areas:
+			"title title"
+			"input-area input-area"
+			"link-left link-right"
+			"submit submit";
+		grid-template-columns: 1fr 1fr;
+
+		margin: 0 40px;
+
+		.title {
+			grid-area: title;
+
+			margin-top: 36px;
+
+			text-align: center;
+
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		.input-area {
+			grid-area: input-area;
+
+			font-size: 2rem;
+
+			input {
+				box-sizing: border-box;
+				width: 100%;
+				height: 80px;
+
+				margin-top: 15px;
+
+				border: none;
+				border-radius: 10px;
+
+				font-size: 1.5rem;
+				background-color: var(--w-bg);
+
+				padding: 0 1rem;
+			}
+	
+			input::placeholder {
+				color: var(--w-bg-offset);
+			}
+
+			input:focus {
+				border: none;
+				outline: 2px solid var(--w-fg);
+			}
+		}
+
+		.link-left {
+			text-align: left;
+			grid-area: link-left;
+		}
+
+		.link-right {
+			text-align: right;
+			grid-area: link-right;
+		}
+
+		.link-left, .link-right {
+			margin-top: 15px;
+			color: #ffc400ff;
+		}
+
+		.submit {
+			grid-area: submit;
+
+
+			width: 160px;
+			height: 70px;
+
+			display: inline-block;
+			margin: 15px auto 36px auto;
+		}
+	}
+}
+
+.card:hover {
+	filter: drop-shadow(0px 0px 10px #001a03ff);
+}
+
+.button {
+	user-select: none;
+	user-drag: none;
+
+	font-family: 'Iosevka', monospace;
+	/*
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1.5rem;
+	*/
+
+	padding: 10px;
+
+	background-color: var(--w-bg-offset, grey);
+	color: var(--w-fg, white);
+
+	border-radius: 10px;
+	outline: 2px solid var(--w-fg);
+	/*outline-style: dotted/dashed/solid/double/groove/ridge;*/
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-decoration: none;
+}
+
+.button:hover {
+	color: red;
+	background-color: #2D2D2D;
+}
