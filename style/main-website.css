@@ -22,6 +22,83 @@ body {
 	background-color: var(--w-bg,#121212ff);
 }
 
+.background {
+	z-index: -1;
+	position: absolute;
+}
+
+.cloud-1 {
+	top: 100px;
+	left: 56px;
+
+	animation-name: moveRight;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 0s;
+
+	max-width: 200px;
+}
+
+.cloud-2 {
+	top: 150px;
+	right: 89px;
+
+	animation-name: moveLeft;
+	animation-duration: 10s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 1s;
+
+	max-width: 129px;
+}
+
+.cloud-3 {
+	bottom: 100px;
+	left: 10px;
+
+	animation-name: moveRight;
+	animation-duration: 9s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 0s;
+
+	max-width: 270px;
+}
+
+.cloud-4 {
+	bottom: 46px;
+	right: 64px;
+
+	animation-name: moveLeft;
+	animation-duration: 20s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 1s;
+
+	max-width: 300px;
+}
+
+@keyframes moveRight {
+	0%, 100% {
+		translate: 0 0;
+	}
+
+	50% {
+		translate: 100px 0;
+	}
+}
+
+@keyframes moveLeft {
+	0%, 100% {
+		translate: 0 0;
+	}
+
+	50% {
+		translate: -100px 0;
+	}
+}
+
 .main {
 	scrollbar-color: red;
 	width: 100%;
