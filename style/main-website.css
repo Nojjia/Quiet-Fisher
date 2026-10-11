@@ -22,14 +22,21 @@ body {
 	background-color: var(--w-bg,#121212ff);
 }
 
+.logo-compact {
+	background-image: url('../../assets/images/logo-compact.svg');
+	background-size: 100px 100px;
+	width: 100px;
+	height: 100px;
+}
+
 .background {
 	z-index: -1;
 	position: absolute;
 }
 
 .cloud-1 {
-	top: 100px;
-	left: 56px;
+	top: 10%;
+	left: 5%;
 
 	animation-name: moveRight;
 	animation-duration: 10s;
@@ -37,12 +44,14 @@ body {
 	animation-iteration-count: infinite;
 	animation-delay: 0s;
 
-	max-width: 200px;
+	min-width: 1rem;
+	width: 12%;
+	max-width: 300px;
 }
 
 .cloud-2 {
-	top: 150px;
-	right: 89px;
+	top: 16%;
+	right: 0.8%;
 
 	animation-name: moveLeft;
 	animation-duration: 10s;
@@ -50,12 +59,14 @@ body {
 	animation-iteration-count: infinite;
 	animation-delay: 1s;
 
+	min-width: 1rem;
+	width: 10%;
 	max-width: 129px;
 }
 
 .cloud-3 {
-	bottom: 100px;
-	left: 10px;
+	bottom: 12%;
+	left: 1px;
 
 	animation-name: moveRight;
 	animation-duration: 9s;
@@ -63,12 +74,14 @@ body {
 	animation-iteration-count: infinite;
 	animation-delay: 0s;
 
+	min-width: 1rem;
+	width: 13%;
 	max-width: 270px;
 }
 
 .cloud-4 {
-	bottom: 46px;
-	right: 64px;
+	bottom: 10%;
+	right: 6%;
 
 	animation-name: moveLeft;
 	animation-duration: 20s;
@@ -76,6 +89,8 @@ body {
 	animation-iteration-count: infinite;
 	animation-delay: 1s;
 
+	min-width: 1rem;
+	width: 25%;
 	max-width: 300px;
 }
 
