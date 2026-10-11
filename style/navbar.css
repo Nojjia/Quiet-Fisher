@@ -13,7 +13,7 @@ header .navbar
 		a .button .login
 		a .button .signup
 */
-.navbar {
+#navbar {
 	/*Stop user from being to select the elements in the navbar*/
 	user-select: none;
 

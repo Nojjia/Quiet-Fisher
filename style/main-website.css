@@ -3,7 +3,10 @@
 
 @import url('../style/colors.css');
 
-* {color: white;}
+* {
+	color: white;
+	z-index: 2;
+}
 
 body {
 	width: 100vw;
@@ -29,8 +32,56 @@ body {
 	height: 100px;
 }
 
+#true-background {
+	z-index: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+
+	.row {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+		.item {
+			background-image: url("../assets/images/hook.svg");
+			background-repeat: no-repeat;
+		}
+
+		.item:hover {
+			animation-name: wiggle;
+			animation-duration: 1s;
+			animation-timing-function: ease;
+			animation-iteration-count: infinite;
+			animation-delay: 0s;
+		}
+	}
+}
+
+@keyframes wiggle {
+	0%, 100% {
+		transform: scale(1) rotate(0);
+	}
+	25% {
+		transform: scale(1.2) rotate(45deg);
+	}
+	50% {
+		transform: scale(1.2) rotate(-45deg);
+	}
+	75% {
+		transform: scale(1.2) rotate(45deg);
+	}
+}
+
 .background {
-	z-index: -1;
+	z-index: 0;
 	position: absolute;
 }
 
@@ -115,7 +166,6 @@ body {
 }
 
 .main {
-	scrollbar-color: red;
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
@@ -228,7 +278,6 @@ body {
 
 .button {
 	user-select: none;
-	user-drag: none;
 
 	font-family: 'Iosevka', monospace;
 	/*
