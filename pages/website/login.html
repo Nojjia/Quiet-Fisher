@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,15 @@
 	<link rel="stylesheet" href="../../style/main-website.css">
 	<link rel="stylesheet" href="../../style/navbar.css">
 	<link rel="stylesheet" href="../../style/footer.css">
+	<script type="module" src="../../script/login.js" defer></script>
 	<script src="../../script/website-background.js" defer></script>
 </head>
 <body>
 	<div id="true-background"></div>
-	<img class="background cloud-1" src="../../assets/images/cloud-1.png">
-	<img class="background cloud-2" src="../../assets/images/cloud-2.png">
-	<img class="background cloud-3" src="../../assets/images/cloud-3.png">
-	<img class="background cloud-4" src="../../assets/images/cloud-4.png">
+	<img class="background cloud-1" src="../../assets/images/cloud-1.svg">
+	<img class="background cloud-2" src="../../assets/images/cloud-2.svg">
+	<img class="background cloud-3" src="../../assets/images/cloud-3.svg">
+	<img class="background cloud-4" src="../../assets/images/cloud-4.svg">
 	<!--
 		N   N     A     V       V BBBB      A     RRRR
 		NN  N    A A     V     V  B   B    A A    R   R
@@ -52,19 +53,19 @@
 	-->
 	<main class="main">
 		<div class="card">
-			<form class="account">
+			<div id="account">
 				<div class="title">Log In</div>
 				<div class="input-area">
 					<label class="account-label" for="username">Username:</label>
 					<input id="username" name="username" type="text" placeholder="Enter your username...">
 					<label class="account-label" for="password">Password:</label>
-					<input for="password" name="password" type="password" placeholder="Enter your password...">
+					<input id="password" name="password" type="password" placeholder="Enter your password...">
 					<div id="password-issue"></div>
 				</div>
 				<a class="link-left" href="../../pages/website/signup.html">I don't have an account!</a>
 				<a class="link-right" href="#">Forgot Password</a>
-				<input class="button submit" type="submit" value="Log In">
-			</form>
+				<button id="login" class="button submit">Log In</button>
+			</div>
 		</div>
 	</main>
 	<!--

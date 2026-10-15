@@ -1,5 +1,3 @@
-console.clear();
-
 function row(){
 	const row = document.createElement("div");
 
@@ -19,13 +17,15 @@ function item() {
 	return item;
 }
 
-const screenSize = [window.innerWidth, window.innerHeight];
+const screenSize = [document.documentElement.scrollWidth, document.documentElement.scrollHeight];
+
 const background = document.getElementById("true-background");
+
 const itemSize = 50;
 const itemMargin = 10;
 
-let columnCount = parseInt(screenSize[0] / (itemSize + itemMargin));
-let rowCount = parseInt(screenSize[1] / (itemSize + itemMargin));
+let columnCount = Math.ceil(screenSize[0] / (itemSize + itemMargin));
+let rowCount = Math.ceil(screenSize[1] / (itemSize + itemMargin +10));
 
 for (let height = 0; height < rowCount; height++) {
 	const currentRow = row();

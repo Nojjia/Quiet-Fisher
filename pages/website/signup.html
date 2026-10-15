@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,15 @@
 	<link rel="stylesheet" href="../../style/main-website.css">
 	<link rel="stylesheet" href="../../style/navbar.css">
 	<link rel="stylesheet" href="../../style/footer.css">
+	<script type="module" src="../../script/signup.js" defer></script>
 	<script src="../../script/website-background.js" defer></script>
 </head>
 <body>
 	<div id="true-background"></div>
-	<img class="background cloud-1" src="../../assets/images/cloud-1.png">
-	<img class="background cloud-2" src="../../assets/images/cloud-2.png">
-	<img class="background cloud-3" src="../../assets/images/cloud-3.png">
-	<img class="background cloud-4" src="../../assets/images/cloud-4.png">
+	<img class="background cloud-1" src="../../assets/images/cloud-1.svg">
+	<img class="background cloud-2" src="../../assets/images/cloud-2.svg">
+	<img class="background cloud-3" src="../../assets/images/cloud-3.svg">
+	<img class="background cloud-4" src="../../assets/images/cloud-4.svg">
 	<!--
 		N   N     A     V       V BBBB      A     RRRR
 		NN  N    A A     V     V  B   B    A A    R   R
@@ -52,20 +53,280 @@
 	-->
 	<main class="main">
 		<div class="card">
-			<form class="account">
+			<div id="account">
 				<div class="title">Sign Up</div>
 				<div class="input-area">
-					<label class="account-label" for="username">Username:</label>
+					<label class="account-label" for="email">E-Mail:</label>
+					<input id="email" name="email" type="email" placeholder="example@email.com">
+
+					<label class="account-label" for="username">Username:<br><span class="constraint">(1-20 characters, and must be unique)</span></label>
 					<input id="username" name="username" type="text" placeholder="Enter your username...">
-					<label class="account-label" for="password">Password:</label>
+
+					<label class="account-label" for="age">Age:</label>
+					<input id="age" name="age" type="number" min="1" placeholder="Enter your age...">
+
+					<label class="account-label" for="address">Address:</label>
+					<input id="address" name="addres" type="text" placeholder="Enter your address...">
+
+					<label class="account-label" for="phone">Phone:</label>
+					<div class="phone">
+						<select id="phone-country" name="phone-country">
+							<option value="" selected>Select</option>
+							<option value="93" name="Afghanistan">Afghanistan</option>
+							<option value="355" name="Albania">Albania</option>
+							<option value="213" name="Algeria">Algeria</option>
+							<option value="1-684" name="American">American Samoa</option>
+							<option value="376" name="Andorra">Andorra</option>
+							<option value="244" name="Angola">Angola</option>
+							<option value="1-264" name="Anguilla">Anguilla</option>
+							<option value="672" name="Antarctica">Antarctica</option>
+							<option value="1-268" name="Antigua">Antigua and Barbuda</option>
+							<option value="54" name="Argentina">Argentina</option>
+							<option value="374" name="Armenia">Armenia</option>
+							<option value="297" name="Aruba">Aruba</option>
+							<option value="61" name="Australia">Australia</option>
+							<option value="43" name="Austria">Austria</option>
+							<option value="994" name="Azerbaijan">Azerbaijan</option>
+							<option value="1-242" name="Bahamas">Bahamas</option>
+							<option value="973" name="Bahrain">Bahrain</option>
+							<option value="880" name="Bangladesh">Bangladesh</option>
+							<option value="1-246" name="Barbados">Barbados</option>
+							<option value="375" name="Belarus">Belarus</option>
+							<option value="32" name="Belgium">Belgium</option>
+							<option value="501" name="Belize">Belize</option>
+							<option value="229" name="Benin">Benin</option>
+							<option value="1-441" name="Bermuda">Bermuda</option>
+							<option value="975" name="Bhutan">Bhutan</option>
+							<option value="591" name="Bolivia">Bolivia</option>
+							<option value="387" name="Bosnia">Bosnia and Herzegovina</option>
+							<option value="267" name="Botswana">Botswana</option>
+							<option value="55" name="Brazil">Brazil</option>
+							<option value="246" name="British">British Indian Ocean Territory</option>
+							<option value="1-284" name="British">British Virgin Islands</option>
+							<option value="673" name="Brunei">Brunei</option>
+							<option value="359" name="Bulgaria">Bulgaria</option>
+							<option value="226" name="Burkina">Burkina Faso</option>
+							<option value="257" name="Burundi">Burundi</option>
+							<option value="855" name="Cambodia">Cambodia</option>
+							<option value="237" name="Cameroon">Cameroon</option>
+							<option value="1" name="Canada">Canada</option>
+							<option value="238" name="Cape">Cape Verde</option>
+							<option value="1-345" name="Cayman">Cayman Islands</option>
+							<option value="236" name="Central">Central African Republic</option>
+							<option value="235" name="Chad">Chad</option>
+							<option value="56" name="Chile">Chile</option>
+							<option value="86" name="China">China</option>
+							<option value="61" name="Christmas">Christmas Island</option>
+							<option value="61" name="Cocos">Cocos Islands</option>
+							<option value="57" name="Colombia">Colombia</option>
+							<option value="269" name="Comoros">Comoros</option>
+							<option value="682" name="Cook">Cook Islands</option>
+							<option value="506" name="Costa">Costa Rica</option>
+							<option value="385" name="Croatia">Croatia</option>
+							<option value="53" name="Cuba">Cuba</option>
+							<option value="599" name="Curacao">Curacao</option>
+							<option value="357" name="Cyprus">Cyprus</option>
+							<option value="420" name="Czech">Czech Republic</option>
+							<option value="243" name="Democratic">Democratic Republic of the Congo</option>
+							<option value="45" name="Denmark">Denmark</option>
+							<option value="253" name="Djibouti">Djibouti</option>
+							<option value="1-767" name="Dominica">Dominica</option>
+							<option value="1-809," name="1-">1-829, 1-849 Dominican Republic</option>
+							<option value="670" name="East">East Timor</option>
+							<option value="593" name="Ecuador">Ecuador</option>
+							<option value="20" name="Egypt">Egypt</option>
+							<option value="503" name="El">El Salvador</option>
+							<option value="240" name="Equatorial">Equatorial Guinea</option>
+							<option value="291" name="Eritrea">Eritrea</option>
+							<option value="372" name="Estonia">Estonia</option>
+							<option value="251" name="Ethiopia">Ethiopia</option>
+							<option value="500" name="Falkland">Falkland Islands</option>
+							<option value="298" name="Faroe">Faroe Islands</option>
+							<option value="679" name="Fiji">Fiji</option>
+							<option value="358" name="Finland">Finland</option>
+							<option value="33" name="France">France</option>
+							<option value="689" name="French">French Polynesia</option>
+							<option value="241" name="Gabon">Gabon</option>
+							<option value="220" name="Gambia">Gambia</option>
+							<option value="995" name="Georgia">Georgia</option>
+							<option value="49" name="Germany">Germany</option>
+							<option value="233" name="Ghana">Ghana</option>
+							<option value="350" name="Gibraltar">Gibraltar</option>
+							<option value="30" name="Greece">Greece</option>
+							<option value="299" name="Greenland">Greenland</option>
+							<option value="1-473" name="Grenada">Grenada</option>
+							<option value="1-671" name="Guam">Guam</option>
+							<option value="502" name="Guatemala">Guatemala</option>
+							<option value="44-1481" name="Guernsey">Guernsey</option>
+							<option value="224" name="Guinea">Guinea</option>
+							<option value="245" name="Guinea">Guinea-Bissau</option>
+							<option value="592" name="Guyana">Guyana</option>
+							<option value="509" name="Haiti">Haiti</option>
+							<option value="504" name="Honduras">Honduras</option>
+							<option value="852" name="Hong">Hong Kong</option>
+							<option value="36" name="Hungary">Hungary</option>
+							<option value="354" name="Iceland">Iceland</option>
+							<option value="91" name="India">India</option>
+							<option value="62" name="Indonesia">Indonesia</option>
+							<option value="98" name="Iran">Iran</option>
+							<option value="964" name="Iraq">Iraq</option>
+							<option value="353" name="Ireland">Ireland</option>
+							<option value="44-1624" name="Isle">Isle of Man</option>
+							<option value="972" name="Israel">Israel</option>
+							<option value="39" name="Italy">Italy</option>
+							<option value="225" name="Ivory">Ivory Coast</option>
+							<option value="1-876" name="Jamaica">Jamaica</option>
+							<option value="81" name="Japan">Japan</option>
+							<option value="44-1534" name="Jersey">Jersey</option>
+							<option value="962" name="Jordan">Jordan</option>
+							<option value="7" name="Kazakhstan">Kazakhstan</option>
+							<option value="254" name="Kenya">Kenya</option>
+							<option value="686" name="Kiribati">Kiribati</option>
+							<option value="383" name="Kosovo">Kosovo</option>
+							<option value="965" name="Kuwait">Kuwait</option>
+							<option value="996" name="Kyrgyzstan">Kyrgyzstan</option>
+							<option value="856" name="Laos">Laos</option>
+							<option value="371" name="Latvia">Latvia</option>
+							<option value="961" name="Lebanon">Lebanon</option>
+							<option value="266" name="Lesotho">Lesotho</option>
+							<option value="231" name="Liberia">Liberia</option>
+							<option value="218" name="Libya">Libya</option>
+							<option value="423" name="Liechtenstein">Liechtenstein</option>
+							<option value="370" name="Lithuania">Lithuania</option>
+							<option value="352" name="Luxembourg">Luxembourg</option>
+							<option value="853" name="Macau">Macau</option>
+							<option value="389" name="Macedonia">Macedonia</option>
+							<option value="261" name="Madagascar">Madagascar</option>
+							<option value="265" name="Malawi">Malawi</option>
+							<option value="60" name="Malaysia">Malaysia</option>
+							<option value="960" name="Maldives">Maldives</option>
+							<option value="223" name="Mali">Mali</option>
+							<option value="356" name="Malta">Malta</option>
+							<option value="692" name="Marshall">Marshall Islands</option>
+							<option value="222" name="Mauritania">Mauritania</option>
+							<option value="230" name="Mauritius">Mauritius</option>
+							<option value="262" name="Mayotte">Mayotte</option>
+							<option value="52" name="Mexico">Mexico</option>
+							<option value="691" name="Micronesia">Micronesia</option>
+							<option value="373" name="Moldova">Moldova</option>
+							<option value="377" name="Monaco">Monaco</option>
+							<option value="976" name="Mongolia">Mongolia</option>
+							<option value="382" name="Montenegro">Montenegro</option>
+							<option value="1-664" name="Montserrat">Montserrat</option>
+							<option value="212" name="Morocco">Morocco</option>
+							<option value="258" name="Mozambique">Mozambique</option>
+							<option value="95" name="Myanmar">Myanmar</option>
+							<option value="264" name="Namibia">Namibia</option>
+							<option value="674" name="Nauru">Nauru</option>
+							<option value="977" name="Nepal">Nepal</option>
+							<option value="31" name="Netherlands">Netherlands</option>
+							<option value="599" name="Netherlands">Netherlands Antilles</option>
+							<option value="687" name="New">New Caledonia</option>
+							<option value="64" name="New">New Zealand</option>
+							<option value="505" name="Nicaragua">Nicaragua</option>
+							<option value="227" name="Niger">Niger</option>
+							<option value="234" name="Nigeria">Nigeria</option>
+							<option value="683" name="Niue">Niue</option>
+							<option value="850" name="North">North Korea</option>
+							<option value="1-670" name="Northern">Northern Mariana Islands</option>
+							<option value="47" name="Norway">Norway</option>
+							<option value="968" name="Oman">Oman</option>
+							<option value="92" name="Pakistan">Pakistan</option>
+							<option value="680" name="Palau">Palau</option>
+							<option value="970" name="Palestine">Palestine</option>
+							<option value="507" name="Panama">Panama</option>
+							<option value="675" name="Papua">Papua New Guinea</option>
+							<option value="595" name="Paraguay">Paraguay</option>
+							<option value="51" name="Peru">Peru</option>
+							<option value="63" name="Philippines">Philippines</option>
+							<option value="64" name="Pitcairn">Pitcairn</option>
+							<option value="48" name="Poland">Poland</option>
+							<option value="351" name="Portugal">Portugal</option>
+							<option value="1-787," name="1-">1-939 Puerto Rico</option>
+							<option value="974" name="Qatar">Qatar</option>
+							<option value="242" name="Republic">Republic of the Congo</option>
+							<option value="262" name="Reunion">Reunion</option>
+							<option value="40" name="Romania">Romania</option>
+							<option value="7" name="Russia">Russia</option>
+							<option value="250" name="Rwanda">Rwanda</option>
+							<option value="590" name="Saint">Saint Barthelemy</option>
+							<option value="290" name="Saint">Saint Helena</option>
+							<option value="1-869" name="Saint">Saint Kitts and Nevis</option>
+							<option value="1-758" name="Saint">Saint Lucia</option>
+							<option value="590" name="Saint">Saint Martin</option>
+							<option value="508" name="Saint">Saint Pierre and Miquelon</option>
+							<option value="1-784" name="Saint">Saint Vincent and the Grenadines</option>
+							<option value="685" name="Samoa">Samoa</option>
+							<option value="378" name="San">San Marino</option>
+							<option value="239" name="Sao">Sao Tome and Principe</option>
+							<option value="966" name="Saudi">Saudi Arabia</option>
+							<option value="221" name="Senegal">Senegal</option>
+							<option value="381" name="Serbia">Serbia</option>
+							<option value="248" name="Seychelles">Seychelles</option>
+							<option value="232" name="Sierra">Sierra Leone</option>
+							<option value="65" name="Singapore">Singapore</option>
+							<option value="1-721" name="Sint">Sint Maarten</option>
+							<option value="421" name="Slovakia">Slovakia</option>
+							<option value="386" name="Slovenia">Slovenia</option>
+							<option value="677" name="Solomon">Solomon Islands</option>
+							<option value="252" name="Somalia">Somalia</option>
+							<option value="27" name="South">South Africa</option>
+							<option value="82" name="South">South Korea</option>
+							<option value="211" name="South">South Sudan</option>
+							<option value="34" name="Spain">Spain</option>
+							<option value="94" name="Sri">Sri Lanka</option>
+							<option value="249" name="Sudan">Sudan</option>
+							<option value="597" name="Suriname">Suriname</option>
+							<option value="47" name="Svalbard">Svalbard and Jan Mayen</option>
+							<option value="268" name="Swaziland">Swaziland</option>
+							<option value="46" name="Sweden">Sweden</option>
+							<option value="41" name="Switzerland">Switzerland</option>
+							<option value="963" name="Syria">Syria</option>
+							<option value="886" name="Taiwan">Taiwan</option>
+							<option value="992" name="Tajikistan">Tajikistan</option>
+							<option value="255" name="Tanzania">Tanzania</option>
+							<option value="66" name="Thailand">Thailand</option>
+							<option value="228" name="Togo">Togo</option>
+							<option value="690" name="Tokelau">Tokelau</option>
+							<option value="676" name="Tonga">Tonga</option>
+							<option value="1-868" name="Trinidad">Trinidad and Tobago</option>
+							<option value="216" name="Tunisia">Tunisia</option>
+							<option value="90" name="Turkey">Turkey</option>
+							<option value="993" name="Turkmenistan">Turkmenistan</option>
+							<option value="1-649" name="Turks">Turks and Caicos Islands</option>
+							<option value="688" name="Tuvalu">Tuvalu</option>
+							<option value="1-340" name="U.">U.S. Virgin Islands</option>
+							<option value="256" name="Uganda">Uganda</option>
+							<option value="380" name="Ukraine">Ukraine</option>
+							<option value="971" name="United">United Arab Emirates</option>
+							<option value="44" name="United">United Kingdom</option>
+							<option value="1" name="United">United States</option>
+							<option value="598" name="Uruguay">Uruguay</option>
+							<option value="998" name="Uzbekistan">Uzbekistan</option>
+							<option value="678" name="Vanuatu">Vanuatu</option>
+							<option value="379" name="Vatican">Vatican</option>
+							<option value="58" name="Venezuela">Venezuela</option>
+							<option value="84" name="Vietnam">Vietnam</option>
+							<option value="681" name="Wallis">Wallis and Futuna</option>
+							<option value="212" name="Western">Western Sahara</option>
+							<option value="967" name="Yemen">Yemen</option>
+							<option value="260" name="Zambia">Zambia</option>
+							<option value="263" name="Zimbabwe">Zimbabwe</option>
+						</select>
+						<input id="phone-number" name="phone-number" type="tel" placeholder="Enter your phone number...">
+					</div>
+
+					<label class="account-label" for="password">Password:<br><span class="constraint">(8-20, at least 1 lowercase,1 uppercase, 1  digit and 1 special character)</span></label>
 					<input id="password" name="password" type="password" placeholder="Enter your password...">
+
 					<label class="account-label" for="confirm-password">Confirm Password:</label>
 					<input id="confirm-password" name="password" type="password" placeholder="Enter your password...">
+
 					<div id="password-issue"></div>
 				</div>
 				<a class="link-right" href="../../pages/website/login.html">I already have an account!</a>
-				<input class="button submit" type="submit" value="Sign Up">
-			</form>
+				<button id="signup" class="button submit">Sign Up</button>
+			</div>
 		</div>
 	</main>
 	<!--
