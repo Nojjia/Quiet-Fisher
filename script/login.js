@@ -7,7 +7,6 @@ window.onload = () => {
 }
 function validateLogin() {
 	const user = localStorage[usernameInput.value];
-	const passwordSaved = JSON.parse(user).password;
 	/*If input fields are empty, return error*/
 	if (!usernameInput.value || !passwordInput.value) {
 		passwordIssue.textContent = "Please fill out all entries...";
@@ -28,6 +27,7 @@ function validateLogin() {
 
 	/*Username validation passed, password validation ongoing here*/
 	/*If password input does not match, return error*/
+	const passwordSaved = JSON.parse(user).password;
 	if (passwordSaved !== passwordInput.value) {
 		usernameInput.style.removeProperty("outline");
 		passwordInput.style.outline = "2px solid red";
