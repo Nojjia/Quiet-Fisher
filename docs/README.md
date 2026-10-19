@@ -6,6 +6,9 @@ Welcome to Quiet Fisher, a simple web game, that I am making for my university c
 
 ***State - [VERY EARLY DEVELOPMENT]***
 
+**The website on github and codeberg won't be loading due to the current base urls set**
+**Will be fixed later**
+
 ## Features
 
 ### User Account
