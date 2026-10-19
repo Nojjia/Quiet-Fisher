@@ -1,165 +1,196 @@
-import "./initiateLocalStorage.js";
+"use strict";
 
-function validateSignup() {
-	const user = {
-		"email": emailInput.value,
-		"age": ageInput.value,
-		"address": addressInput.value,
+function validateSignup(USER_INPUT, message) {
+	const USER = {
+		"email": USER_INPUT.email.value,
+		"age": USER_INPUT.age.value,
+		"address": USER_INPUT.address.value,
 		"phone": {
-			"code": phoneCodeInput.value,
-			"number": phoneNumberInput.value,
+			"code": USER_INPUT.phoneCode.value,
+			"number": USER_INPUT.phoneNumber.value,
 		},
-		"password": passwordInput.value,
+		"password": USER_INPUT.password.value,
 		"leaderboard": {
-			"level_1": {
-				"score": 0,
-				"message": ""
-			},
-			"level_2": {
-				"score": 0,
-				"message": ""
-			},
-			"level_3": {
-				"score": 0,
-				"message": ""
-			},
-			"level_4": {
-				"score": 0,
-				"message": ""
-			},
-			"level_5": {
-				"score": 0,
-				"message": ""
-			},
-			"endless": {
-				"score": 0,
-				"message": ""
-			}
+			"level_1": { "score": 0, "message": "" },
+			"level_2": { "score": 0, "message": "" },
+			"level_3": { "score": 0, "message": "" },
+			"level_4": { "score": 0, "message": "" },
+			"level_5": { "score": 0, "message": "" },
+			"endless": { "score": 0, "message": "" }
 		}
 	};
-	const emailPattern = /^[\w\.]+@[\w\.]+\.[a-z\d]{1,63}$/;
-	const usernamepattern = /^\w{1,20}$/;
-	/*AGE: Test with number limit: age > 1*/
-	const phoneNumberPattern = /^\d+$/;
-	/*ADDRESS: Accept any, because I can't think of any contraints for address styles*/
-	const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
-	/*CONFIRM PASSWORD: Test if === password*/
 
-	/*Check if inputs are empty, and add outline and error message if so*/
-	if (!emailInput.value) emailInput.style.outline = "2px solid red";
-	if (!usernameInput.value) usernameInput.style.outline = "2px solid red";
-	if (!ageInput.value) ageInput.style.outline = "2px solid red";
-	if (!addressInput.value) addressInput.style.outline = "2px solid red";
-	if (!phoneCodeInput.value) phoneCodeInput.style.outline = "2px solid red";
-	if (!phoneNumberInput.value) phoneNumberInput.style.outline = "2px solid red";
-	if (!passwordInput.value) passwordInput.style.outline = "2px solid red";
-	if (!confirmPasswordInput.value) confirmPasswordInput.style.outline = "2px solid red";
-	/*Check if any field is empty and return an error*/
-	if (!emailInput.value || !usernameInput.value ||
-		!ageInput.value || !addressInput.value ||
-		!phoneCodeInput.value || !phoneNumberInput.value ||
-		!passwordInput.value || !confirmPasswordInput.value) {
-		passwordIssue.textContent = "Please fill out all entries...";
-		return;
+	/* REGEX PATTERNS*/
+	const EMAIL_PATTERN = /^[\w\.]+@[\w\.]+\.[a-z\d]{1,63}$/;
+	const USERNAME_PATTERN = /^\w{1,20}$/;
+	const PHONE_NUMBER_PATTERN = /^\d+$/;
+	const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
+
+	/* 
+		* isEmpty tells us if an input element is empty
+		* msgText holds error message text
+		* anyError lets us know if there were any validation errors
+	*/
+	let isEmpty = false, anyError = false, msgText = "";
+
+	/*If an element is empty, add outline*/
+	for (let element in USER_INPUT) {
+		if (!USER_INPUT[element].value) {
+			USER_INPUT[element].style.outline = "2px solid red";
+			isEmpty = true;
+		}
 	}
-	/*If username is already in use, return error*/
-	if (localStorage[usernameInput.value]) {
-		passwordIssue.textContent = "*Username already in use!!";
-		return;
-	}
-	/*If user attempts to signup using guest account, return error*/
-	if (usernameInput.value === "guest") {
-		passwordIssue.textContent = "Username is invalid";
-		return;
-	}
-	/*Input field format validations if format wrong, return error*/
-	/*Format Validation: EMAIL*/
-	if (!emailPattern.test(emailInput.value)) {
-		emailInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "Email address is invalid";
-		return;
-	}
-	/*Format Validation: USERNAME*/
-	if (!usernamepattern.test(usernameInput.value)) {
-		usernameInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "Username is invalid";
-		return;
-	}
-	/*Format Validation: AGE*/
-	if (ageInput.value <= 0) {
-		ageInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "How are you alive???  Are you a ghost?";
-	} else if (ageInput.value < 5) {
-		ageInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "It's a babyyy";
-	} else if (ageInput.value > 120) {
-		ageInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "How are you alive???  Are you a legend?";
-	}
-	/*Format Validation: PHONE NUMBER*/
-	if (!phoneNumberPattern.test(phoneNumberInput.value)) {
-		phoneNumberInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "Phone Number is invalid";
-		return;
-	}
-	/*Format Validation: PASSWORD*/
-	if (!passwordPattern.test(passwordInput.value)) {
-		passwordInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "Password is invalid";
-		return;
-	}
-	/*Format Validation: CONFIRM PASSWORD*/
-	if (passwordInput.value !== confirmPasswordInput.value) {
-		passwordInput.style.outline = "2px solid red";
-		confirmPasswordInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "Passwords don't match";
+
+	/*if isEmpty true then exit*/
+	if (isEmpty) {
+		message.textContent = "Please fill out all entries...";
 		return;
 	}
 
-	localStorage.setItem(usernameInput.value, JSON.stringify(user));
-	sessionStorage.user = usernameInput.value;
+	/*Check if username input is guest or already in use*/
+	if (USER_INPUT.username.value === "guest") { /*check guest*/
+		msgText += "Username is invalid\n";
+		anyError = true;
+	} else if (localStorage[USER_INPUT.username.value]) { /*check exists*/
+		msgText += "*Username already in use!!\n";
+		anyError = true;
+	}
+
+	/*Begin RegEx format validation*/
+
+	/* Validate EMAIL format
+		* Email must be in for of {WORDS}@{WORDS}.{WORDS}
+	*/
+	if (!EMAIL_PATTERN.test(USER_INPUT.email.value)) {
+		USER_INPUT.email.style.outline = "2px solid red";
+		msgText += "Email address is invalid\n";
+		anyError = true;
+	}
+
+	/* Validate USERNAME format
+		* Username must be between 1 to 20 characters of \w
+	*/
+	if (!USERNAME_PATTERN.test(USER_INPUT.username.value)) {
+		USER_INPUT.username.style.outline = "2px solid red";
+		msgText += "Username is invalid.\nUsername must be between 1 to 20 in length\n";
+		anyError = true;
+	}
+	/* Validate AGE format
+		* When age is not a number, it is counted as empty and handled above
+		* Any age is valid, for purpose of jokes :)
+	*/
+	if (USER_INPUT.age.value <= 0) {
+		USER_INPUT.age.style.outline = "2px solid red";
+		msgText += "How are you alive???  Are you a ghost?\n";
+	} else if (USER_INPUT.age.value < 5) {
+		USER_INPUT.age.style.outline = "2px solid red";
+		msgText += "It's a babyyy\n";
+	} else if (USER_INPUT.age.value > 120) {
+		USER_INPUT.age.style.outline = "2px solid red";
+		msgText += "How are you alive???  Are you a legend?\n";
+	}
+
+	/* Validate PHONE NUMBER format
+		* Phone number must be strig of digit, of length 1 or more
+	*/
+	if (!PHONE_NUMBER_PATTERN.test(USER_INPUT.phoneNumber.value)) {
+		USER_INPUT.phoneNumber.style.outline = "2px solid red";
+		msgText += "Phone Number is invalid\n";
+		anyError = true;
+	}
+
+	/*Validate PASSWORD format
+		* Password must have at least 8 characters long
+		* Password must have at least 1 UPPERCASE letter
+		* Password must have at least 1 lowercase letter
+		* Password must have at least 1 digit
+		* Password must have at least 1 special character
+	*/
+	if (!PASSWORD_PATTERN.test(USER_INPUT.password.value)) {
+		USER_INPUT.password.style.outline = "2px solid red";
+		msgText += "Password is invalid\n";
+		anyError = true;
+	}
+
+	/*Check if CONFIRM PASSWORD is equal to PASSWORD*/
+	if (USER_INPUT.password.value !== USER_INPUT.confirmPassword.value) {
+		USER_INPUT.password.style.outline = "2px solid red";
+		USER_INPUT.confirmPassword.style.outline = "2px solid red";
+		msgText += "Passwords don't match\n";
+		anyError = true;
+	}
+
+	/*If errors were found during validation, msgText will not be empty
+		* Hence display msgText and exit
+	*/
+	if (anyError) {
+		message.textContent = msgText;
+		return;
+	}
+
+	/*
+		* ALL INPUT FIELDS ARE VALID
+		* Proceed to game
+	*/
+	localStorage.setItem(USER_INPUT.username.value, JSON.stringify(USER));
+	sessionStorage.user = USER_INPUT.username.value;
 	window.location.assign("../../pages/game/menu.html");
 }
 
-function clearError(inputObj) {
-	inputObj.style.removeProperty("outline");
-	passwordIssue.textContent = "";
+/* clearError
+	* When an input field has an error, it gets a red outline and error message
+	* This function clears only the outline of element passed, on user interaction
+	* This function clears all error messages in DISPLAY_MESSAGE
+*/
+function clearError(element, message) {
+	element.style.removeProperty("outline");
+	message.textContent = "";
 }
 
-const emailInput           = document.getElementById("email");
-const usernameInput        = document.getElementById("username");
-const ageInput             = document.getElementById("age");
-const addressInput         = document.getElementById("address");
-const phoneCodeInput       = document.getElementById("phone-country");
-const phoneNumberInput     = document.getElementById("phone-number");
-const passwordInput        = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirm-password");
+function init() {
+	/*USER_INPUT holds all input fields*/
+	const USER_INPUT = {
+		email: document.getElementById("email"),
+		username: document.getElementById("username"),
+		age: document.getElementById("age"),
+		address: document.getElementById("address"),
+		phoneCode: document.getElementById("phone-country"),
+		phoneNumber: document.getElementById("phone-number"),
+		password: document.getElementById("password"),
+		confirmPassword: document.getElementById("confirm-password")
+	};
 
-const signupButton         = document.getElementById("signup");
-const passwordIssue        = document.getElementById("password-issue");
+	/*THE SIGNUP BUTTON to call validateSignup*/
+	const SIGNUP_BUTTON   = document.getElementById("signup");
 
-/*Clear Red Outline OnClick*/
-emailInput.addEventListener("click",           () => clearError(emailInput));
-usernameInput.addEventListener("click",        () => clearError(usernameInput));
-ageInput.addEventListener("click",             () => clearError(ageInput));
-addressInput.addEventListener("click",         () => clearError(addressInput));
-phoneCodeInput.addEventListener("mousedown",   () => clearError(phoneCodeInput));
-phoneNumberInput.addEventListener("click",     () => clearError(phoneNumberInput));
-passwordInput.addEventListener("click",        () => clearError(passwordInput));
-confirmPasswordInput.addEventListener("click", () => clearError(confirmPasswordInput));
+	/*Div that displays errors or miscellaneous messages*/
+	const DISPLAY_MESSAGE = document.getElementById("password-issue");
+	DISPLAY_MESSAGE.style.whiteSpace = 'pre-line';
 
+	/*On click or keydown event, clearError for field and error message*/
+	for (let key in USER_INPUT) {
+		let element = USER_INPUT[key];
+		element.addEventListener("click",   () => clearError(element, DISPLAY_MESSAGE));
+		element.addEventListener("keydown", () => clearError(element, DISPLAY_MESSAGE));
+	}
 
-/*Clear Red Outline OnKeyDown*/
-emailInput.addEventListener("keydown",           () => clearError(emailInput));
-usernameInput.addEventListener("keydown",        () => clearError(usernameInput));
-ageInput.addEventListener("keydown",             () => clearError(ageInput));
-addressInput.addEventListener("keydown",         () => clearError(addressInput));
-phoneCodeInput.addEventListener("keydown",       () => clearError(phoneCodeInput));
-phoneNumberInput.addEventListener("keydown",     () => clearError(phoneNumberInput));
-passwordInput.addEventListener("keydown",        () => clearError(passwordInput));
-confirmPasswordInput.addEventListener("keydown", () => clearError(confirmPasswordInput));
+	/*On Keydown Enter key, validateSignup
+		* Applied on field password and field confirmPassword
+	*/
+	function isKeydownEnter(event) {
+		if (event.code === "Enter") {
+			validateSignup(USER_INPUT, DISPLAY_MESSAGE);
+		}
+	}
+	USER_INPUT.password.addEventListener("keydown", (event) => {isKeydownEnter(event)});
+	USER_INPUT.confirmPassword.addEventListener("keydown", (event) => {isKeydownEnter(event)});
 
-/*Validate Signup OnKeyDown Enter for password input field*/
-passwordInput.addEventListener("keydown", (event) => {if (event.code === "Enter") validateSignup();});
-/*Validate Signup OnClick button*/
-signupButton.addEventListener("click", validateSignup);
+	/*On click event, validateSignup*/
+	SIGNUP_BUTTON.addEventListener("click", () => {validateSignup(USER_INPUT, DISPLAY_MESSAGE)});
+}
+
+if (document.readyState === 'complete') {
+	init();
+} else {
+	window.addEventListener('load', init);
+}

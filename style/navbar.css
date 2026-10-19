@@ -44,7 +44,7 @@ header .navbar
 	grid-template-columns: 1fr auto 1fr;
 
 	/*General settings for left, center and right portion of navbar*/
-	.left, .center, .right {
+	#left, #center, #right {
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
@@ -58,31 +58,31 @@ header .navbar
 	}
 
 	/*Anchor divs to correct position*/
-	.left {justify-content: flex-start;}
-	.center {justify-content: center;}
-	.right {justify-content: flex-end;}
+	#left {justify-content: flex-start;}
+	#center {justify-content: center;}
+	#right {justify-content: flex-end;}
 
-	.center {
+	#center {
 		/*https://stackoverflow.com/questions/35782960/zoom-in-on-hover-image-and-keep-same-size*/
-		.home img, .leaderboard img {
+		#home img, #leaderboard img {
 			display: block;
 			height: 2rem;
 			transition: 0.3s ease-in-out;
 		}
-		.home img:hover, .leaderboard img:hover {
+		#home img:hover, #leaderboard img:hover {
 			transform: scale(1.2);
 		}
-		.home {
+		#home {
 			aspect-ratio: 52 / 65;
 		}
-		.game-title {
+		#game-title {
 			display: block;
 			margin: 0;
 			padding: 0;
 			max-height: 4rem;
 			aspect-ratio: 344 / 149;
 		}
-		.leaderboard {
+		#leaderboard {
 			aspect-ratio: 65 / 45;
 		}
 	}

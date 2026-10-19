@@ -1,66 +1,120 @@
-import "./initiateLocalStorage.js";
+"use strict";
 
-window.onload = () => {
-	if (sessionStorage.user) {
-		window.location.assign("../../pages/game/menu.html");
+function validateLogin(USER_INPUT, message) {
+	const USER = localStorage[USER_INPUT.username.value];
+	let passwordSaved;
+
+	/*isEmpty tells us if an input element is empty*/
+	let isEmpty = false;
+
+	/*If an element is empty, add outline*/
+	for (let element in USER_INPUT) {
+		if (!USER_INPUT[element].value) {
+			USER_INPUT[element].style.outline = "2px solid red";
+			isEmpty = true;
+		}
 	}
-}
-function validateLogin() {
-	const user = localStorage[usernameInput.value];
-	/*If input fields are empty, return error*/
-	if (!usernameInput.value || !passwordInput.value) {
-		passwordIssue.textContent = "Please fill out all entries...";
-		usernameInput.style.outline = "2px solid red";
-		passwordInput.style.outline = "2px solid red";
-		return;
-	}
-	/*If user does not exist in localstorage, return error*/
-	if (!user) {
-		passwordIssue.textContent = "*Username not recognized!!";
-		return;
-	}
-	/*If user attempts to login using guest account, return error*/
-	if (usernameInput.value === "guest") {
-		passwordIssue.textContent = "Use the navigation bar button to continue as guest!!";
+
+	/*if isEmpty true, then exit*/
+	if (isEmpty) {
+		message.textContent = "Please fill out all entries...";
 		return;
 	}
 
-	/*Username validation passed, password validation ongoing here*/
-	/*If password input does not match, return error*/
-	const passwordSaved = JSON.parse(user).password;
-	if (passwordSaved !== passwordInput.value) {
-		usernameInput.style.removeProperty("outline");
-		passwordInput.style.outline = "2px solid red";
-		passwordIssue.textContent = "*Password Not Correct!!*";
+	/*If user does not exist in localstorage
+		* write error and exit
+		* else get value of stored password
+	*/
+	if (!USER) {
+		USER_INPUT.username.style.outline = "2px solid red";
+		message.textContent = "*Username not recognized!!\nMake sure you have an account!!";
+		return;
+	} else {
+		passwordSaved = JSON.parse(USER).password;
 	}
 
-	/*If password input matches password in localstorage, goto game*/
-	passwordIssue.textContent = "Logged In";
-	sessionStorage.user = usernameInput.value;
+	/*If user attempts to login using guest account, write error and exit*/
+	if (USER_INPUT.username.value === "guest") {
+		USER_INPUT.username.style.outline = "2px solid red";
+		message.textContent = "Use the navigation bar button to continue as guest!!";
+		return;
+	}
+
+	/*
+		* Username VALID
+		* Now validate password
+	*/
+
+	/*If input password and saved password don't match, write error and exit*/
+	if (passwordSaved !== USER_INPUT.password.value) {
+		USER_INPUT.password.style.outline = "2px solid red";
+		message.textContent = "*Password Not Correct!!*";
+		return;
+	}
+
+	/*
+		* ALL INPUT FIELDS ARE VALID
+		* PROCEED TO LOGIN AS USER AND GO TO GAME
+	*/
+	message.textContent = "Logged In";
+	sessionStorage.user = USER_INPUT.username.value;
 	window.location.assign("../../pages/game/menu.html");
 }
 
-/*Given an inputObj, remove the outline, and clear textContent*/
-function clearError(inputObj) {
-	inputObj.style.removeProperty("outline");
-	passwordIssue.textContent = "";
+/* clearError
+	* When an input field has an error, it gets a red outline and error message
+	* This function clears only the outline of element passed, on user interaction
+	* This function clears all error messages in DISPLAY_MESSAGE
+*/
+function clearError(element, message) {
+	element.style.removeProperty("outline");
+	message.textContent = "";
 }
 
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
+function init() {
+	/*Input Field object*/
+	const USER_INPUT = {
+		username: document.getElementById("username"),
+		password: document.getElementById("password")
+	}
 
-const loginButton   = document.getElementById("login");
-const passwordIssue = document.getElementById("password-issue");
+	/*Button to call validateLogin*/
+	const LOGIN_BUTTON    = document.getElementById("login");
 
-/*Clear Red Outline OnClick*/
-usernameInput.addEventListener("click", () => clearError(usernameInput));
-passwordInput.addEventListener("click", () => clearError(passwordInput));
+	/*Div to show error or miscellaneous messages*/
+	const DISPLAY_MESSAGE =document.getElementById("password-issue");
+	DISPLAY_MESSAGE.style.whiteSpace = 'pre-line';
 
-/*Clear Red Outline OnKeyDown*/
-usernameInput.addEventListener("keydown", () => clearError(usernameInput));
-passwordInput.addEventListener("keydown", () => clearError(passwordInput));
+	/*On click or keydown event, clearError for field and error message*/
+	for (let key in USER_INPUT) {
+		let element = USER_INPUT[key];
+		element.addEventListener("click",   () => clearError(element, DISPLAY_MESSAGE));
+		element.addEventListener("keydown", () => clearError(element, DISPLAY_MESSAGE));
+	}
 
-/*Validate Login OnKeyDown Enter for password input field*/
-passwordInput.addEventListener("keydown", (event) => {if (event.code === "Enter") validateLogin();});
-/*Validate Login OnClick button*/
-loginButton.addEventListener("click", validateLogin);
+	/*On Keydown Enter key, validateLogin
+		* Applied on field username and password
+	*/
+	function isKeydownEnter(event) {
+		if (event.code === "Enter") {
+			validateLogin(USER_INPUT, DISPLAY_MESSAGE);
+		}
+	}
+	USER_INPUT.username.addEventListener("keydown", (event) => {isKeydownEnter(event)});
+	USER_INPUT.password.addEventListener("keydown", (event) => {isKeydownEnter(event)});
+
+	/*On click event, validateLogin*/
+	LOGIN_BUTTON.addEventListener("click", () => {validateLogin(USER_INPUT, DISPLAY_MESSAGE)});
+}
+
+/*
+if (sessionStorage.user)
+	window.location.assign("../../pages/game/menu.html");
+else
+*/
+
+if (document.readyState === 'complete') {
+		init();
+} else {
+		window.addEventListener('load', init);
+}

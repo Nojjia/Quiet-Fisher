@@ -17,7 +17,7 @@ footer {
 	align-items: center;
 
 	/* General properties for footer left and right */
-	.footer-left, .footer-right {
+	#footer-left, #footer-right {
 		display: flex;
 		flex-flow: row nowrap;
 
@@ -67,10 +67,10 @@ footer {
 		}
 	}
 
-	.footer-left {
+	#footer-left {
 		margin-left: 20px;
 	}
-	.footer-right {
+	#footer-right {
 		margin-right: 20px;
 	}
 }
