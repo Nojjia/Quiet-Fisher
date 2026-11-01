@@ -15,7 +15,7 @@ let currentPath = window.location.pathname;
 const HOSTNAME = window.location.hostname;
 
 if (HOSTNAME === "nojjia.github.io/" || HOSTNAME === "nojjia.codeberg.page")
-	currentPath.slice("/Quiet-Fisher".length)
+	currentPath = currentPath.slice("/Quiet-Fisher".length);
 
 console.log(currentPath);
 /*Load module for each page, as needed*/
