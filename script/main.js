@@ -17,7 +17,7 @@ const HOSTNAME = window.location.hostname;
 if (HOSTNAME === "nojjia.github.io/" || HOSTNAME === "nojjia.codeberg.page")
 	currentPath.slice("/Quiet-Fisher".length)
 
-
+console.log(currentPath);
 /*Load module for each page, as needed*/
 switch (currentPath) {
 	case '/pages/website/login.html':
