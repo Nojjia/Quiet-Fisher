@@ -14,8 +14,8 @@ import './website-background.js';
 let currentPath = window.location.pathname;
 const HOSTNAME = window.location.hostname;
 
-if (HOSTNAME === "nojjia.github.io/" || HOSTNAME === "nojjia.codeberg.page")
-	currentPath = currentPath.slice("/Quiet-Fisher".length);
+if (HOSTNAME === "nojjia.github.io" || HOSTNAME === "nojjia.codeberg.page")
+	currentPath = currentPath.replace(/^\/Quiet-Fisher/, '');
 
 console.log(currentPath);
 /*Load module for each page, as needed*/
