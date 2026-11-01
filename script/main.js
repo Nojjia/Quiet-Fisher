@@ -11,7 +11,11 @@ import './initiateLocalStorage.js';
 import './website-background.js';
 
 /*get location of current page to dynamically load appropriate module*/
-const currentPath = window.location.pathname;
+let currentPath = window.location.pathname;
+const HOSTNAME = window.location.hostname;
+
+if (HOSTNAME === "nojjia.github.io/" || HOSTNAME === "nojjia.codeberg.page")
+	currentPath.slice("/Quiet-Fisher".length)
 
 
 /*Load module for each page, as needed*/
