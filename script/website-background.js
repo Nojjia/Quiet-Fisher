@@ -32,6 +32,7 @@ function createItem(itemSize, itemMargin) {
 	* This populates the window with ROWs of ITEMs
 */
 function init() {
+	console.log("website-background.js loaded");
 	const BACKGROUND = document.getElementById("background");
 	/*Screen size:
 		* index 0: width ~ Use scrollWidth to get entire loaded document width

@@ -1,7 +1,7 @@
 "use strict";
 
 function validateLogin(USER_INPUT, message) {
-	const USER = localStorage[USER_INPUT.username.value];
+	const USER = JSON.parse(localStorage.getItem('users'))[USER_INPUT.username.value];
 	let passwordSaved;
 
 	/*isEmpty tells us if an input element is empty*/
@@ -30,7 +30,7 @@ function validateLogin(USER_INPUT, message) {
 		message.textContent = "*Username not recognized!!\nMake sure you have an account!!";
 		return;
 	} else {
-		passwordSaved = JSON.parse(USER).password;
+		passwordSaved = USER.password;
 	}
 
 	/*If user attempts to login using guest account, write error and exit*/
@@ -72,6 +72,7 @@ function clearError(element, message) {
 }
 
 function init() {
+	console.log("login.js loaded");
 	/*Input Field object*/
 	const USER_INPUT = {
 		username: document.getElementById("username"),
@@ -106,12 +107,6 @@ function init() {
 	/*On click event, validateLogin*/
 	LOGIN_BUTTON.addEventListener("click", () => {validateLogin(USER_INPUT, DISPLAY_MESSAGE)});
 }
-
-/*
-if (sessionStorage.user)
-	window.location.assign("../../pages/game/menu.html");
-else
-*/
 
 if (document.readyState === 'complete') {
 		init();

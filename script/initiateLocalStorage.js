@@ -1,11 +1,21 @@
 "use strict";
 
-/*User guest must always exist*/
-if (localStorage.guest === undefined) {
-	localStorage.guest = JSON.stringify({"password" : "0", "score": 0});
+/*
+	* users object and users.guest object must always exist
+	* Hence we always check if users and users.guest exist and create them
+*/
+
+if (localStorage.users === undefined || JSON.parse(localStorage.users).guest == undefined) {
+	localStorage.users(JSON.stringify({
+		'guest' : 0 
+	}));
 }
 
-/*Navbar guest button must login as guest*/
+/*
+	* In NAVBAR, there is GUEST button
+	* GUEST button always logs in as guest
+	* GUEST user's score is never recorder
+*/
 const guest = document.getElementById('guest-account');
 guest.addEventListener('click', () => {
 	sessionStorage.user = "guest";

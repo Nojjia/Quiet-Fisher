@@ -1,6 +1,11 @@
 "use strict";
 
+/*
+	* Validate Signup
+*/
 function validateSignup(USER_INPUT, message) {
+	/*GET THE users OBJECT FROM LOCAL STORAGE*/
+	let users = JSON.parse(localStorage.getItem('users'));
 	const USER = {
 		"email": USER_INPUT.email.value,
 		"age": USER_INPUT.age.value,
@@ -11,29 +16,26 @@ function validateSignup(USER_INPUT, message) {
 		},
 		"password": USER_INPUT.password.value,
 		"leaderboard": {
-			"level_1": { "score": 0, "message": "" },
-			"level_2": { "score": 0, "message": "" },
-			"level_3": { "score": 0, "message": "" },
-			"level_4": { "score": 0, "message": "" },
-			"level_5": { "score": 0, "message": "" },
-			"endless": { "score": 0, "message": "" }
+			"level_1": { "score": null, "message": null },
+			"level_2": { "score": null, "message": null },
+			"level_3": { "score": null, "message": null },
 		}
 	};
 
-	/* REGEX PATTERNS*/
+	/* REGEX PATTERNS FOR VALIDATION*/
 	const EMAIL_PATTERN = /^[\w\.]+@[\w\.]+\.[a-z\d]{1,63}$/;
 	const USERNAME_PATTERN = /^\w{1,20}$/;
 	const PHONE_NUMBER_PATTERN = /^\d+$/;
 	const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
 
 	/* 
-		* isEmpty tells us if an input element is empty
-		* msgText holds error message text
-		* anyError lets us know if there were any validation errors
+		* isEmpty -> Is an input field empty?  Will exit if try, else continue function execution
+		* msgText -> Add all messages to be displayed into this variable and display on submit
+		* anyError -> Are there any erros?  Display msgText if true, else do nothing on submit
 	*/
 	let isEmpty = false, anyError = false, msgText = "";
 
-	/*If an element is empty, add outline*/
+	/*If an element is empty, add RED outline to input field to indicate error, and set isEmpty to true for following codeblock*/
 	for (let element in USER_INPUT) {
 		if (!USER_INPUT[element].value) {
 			USER_INPUT[element].style.outline = "2px solid red";
@@ -41,17 +43,20 @@ function validateSignup(USER_INPUT, message) {
 		}
 	}
 
-	/*if isEmpty true then exit*/
+	/*if isEmpty true then display error message and exit*/
 	if (isEmpty) {
 		message.textContent = "Please fill out all entries...";
 		return;
 	}
 
 	/*Check if username input is guest or already in use*/
-	if (USER_INPUT.username.value === "guest") { /*check guest*/
+	if (users === null) {
+		message.textContent = "FATAL ERROR!!\nUSERS RECORD DOESN'T EXIST!!\nCONTACT YOUR IT FRIEND!!";
+		return;
+	} else if (USER_INPUT.username.value === "guest") { /*check guest*/
 		msgText += "Username is invalid\n";
 		anyError = true;
-	} else if (localStorage[USER_INPUT.username.value]) { /*check exists*/
+	} else if (users[USER_INPUT.username.value]) { /*check exists*/
 		msgText += "*Username already in use!!\n";
 		anyError = true;
 	}
@@ -132,7 +137,8 @@ function validateSignup(USER_INPUT, message) {
 		* ALL INPUT FIELDS ARE VALID
 		* Proceed to game
 	*/
-	localStorage.setItem(USER_INPUT.username.value, JSON.stringify(USER));
+	users[USER_INPUT.username.value] = USER;
+	localStorage.users = JSON.stringify(users);
 	sessionStorage.user = USER_INPUT.username.value;
 	window.location.assign("../../pages/game/menu.html");
 }
@@ -148,6 +154,7 @@ function clearError(element, message) {
 }
 
 function init() {
+	console.log("signup.js loaded");
 	/*USER_INPUT holds all input fields*/
 	const USER_INPUT = {
 		email: document.getElementById("email"),
