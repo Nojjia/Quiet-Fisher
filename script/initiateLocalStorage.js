@@ -6,7 +6,7 @@
 */
 
 if (localStorage.users === undefined || JSON.parse(localStorage.users).guest == undefined) {
-	localStorage.users(JSON.stringify({
+	localStorage.users = (JSON.stringify({
 		'guest' : 0 
 	}));
 }
