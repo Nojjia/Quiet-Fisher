@@ -1,7 +1,2 @@
-!assets/images
-#!assets/sprites
-#!assets/textures
-assets/*
-script/game/*
 temp
 wip

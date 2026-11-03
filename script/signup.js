@@ -16,9 +16,9 @@ function validateSignup(USER_INPUT, message) {
 		},
 		"password": USER_INPUT.password.value,
 		"leaderboard": {
-			"level_1": { "score": null, "message": null },
-			"level_2": { "score": null, "message": null },
-			"level_3": { "score": null, "message": null },
+			"level_1": { "score": null, "caught": 0 },
+			"level_2": { "score": null, "caught": 0 },
+			"level_3": { "score": null, "caught": 0 },
 		}
 	};
 
