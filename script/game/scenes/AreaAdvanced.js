@@ -80,6 +80,8 @@ export class AreaAdvanced extends Phaser.Scene {
 		/*BACK BUTTON FOR NAVIAGATION*/
 		this.createButton(10, 10, 'Areas', 16, 16, 100, 'button', () => {
 			this.fishCaughtSFX.stop();
+			this.registry.get('backgroundMusic').resume();
+			this.currentlyFishing = false;
 			this.scene.start('Game');
 		});
 	}

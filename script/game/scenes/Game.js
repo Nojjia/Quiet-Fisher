@@ -82,7 +82,21 @@ export class Game extends Phaser.Scene {
 				(text === 'ADVANCED' && USER[USERNAME].leaderboard.level_2.caught < 20)
 			) {
 				denyAccess = true;
-				this.add.text(x, y, '🔒', { fontSize: 64 }).setOrigin(0.5); // create the lock to show access is denied
+				this.add.text(x, y, '🔒', { fontSize: 64, color: 'black' }).setOrigin(0.5); // create the lock to show access is denied
+			}
+
+			if (text === 'INTERMEDIATE' && USER[USERNAME].leaderboard.level_1.caught < 10) {
+				this.add.text(x, y+200, 'You need to\ncatch 10 fish\nto unlock\nthis area', {
+					fontSize: 32,
+					color: 'red',
+					backgroundColor: 'black'
+				}).setOrigin(0.5); // create the lock to show access is denied
+			} else if (text === 'ADVANCED' && USER[USERNAME].leaderboard.level_2.caught < 20) {
+				this.add.text(x, y+200, 'You need to\ncatch 20 fish\nto unlock\nthis area', {
+					fontSize: 32,
+					color: 'red',
+					backgroundColor: 'black'
+				}).setOrigin(0.5); // create the lock to show access is denied
 			}
 		}
 
