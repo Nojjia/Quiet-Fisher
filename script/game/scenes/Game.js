@@ -62,9 +62,9 @@ export class Game extends Phaser.Scene {
 		const USERNAME = sessionStorage.getItem('user');
 
 		/*Create level selector buttons*/
-		let newBackground = this.add.image(x, y, 'level-icon-big-background');
+		let newBackground = this.add.image(x, y, 'level-icon-background');
 		let newLabel = this.add.text(x, y-84, text).setOrigin(0.5);
-		let newImage = this.add.image(x, y, 'level-icon-big').setOrigin(0.5);
+		let newImage = this.add.image(x, y, 'level-icon').setOrigin(0.5);
 
 		/*
 			* lets us know if access to a level is denied

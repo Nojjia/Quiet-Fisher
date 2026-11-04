@@ -62,9 +62,8 @@ export class Preloader extends Phaser.Scene {
 		this.load.image('menu-background', 'assets/images/page.png');
 		this.load.image('button', 'assets/textures/nine-slice/button-menu.png');
 		this.load.image('panel', 'assets/textures/nine-slice/panel.png');
-		this.load.image('level-icon-big', 'assets/textures/paper-boat-big.png');
-		this.load.image('level-icon-small', 'assets/textures/paper-boat-small.png');
-		this.load.image('level-icon-big-background', 'assets/textures/paper-boat-background.png');
+		this.load.image('level-icon', 'assets/textures/paper-boat.png');
+		this.load.image('level-icon-background', 'assets/textures/paper-boat-background.png');
 
 		this.load.tilemapTiledJSON('map-beginner', 'assets/textures/AreaBeginner.tmj');
 		this.load.tilemapTiledJSON('map-intermediate', 'assets/textures/AreaIntermediate.tmj');
