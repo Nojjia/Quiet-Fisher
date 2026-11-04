@@ -1,3 +1,12 @@
+/*
+ CCCCCC  oooo  LL      oooo  RRRR  SSSSS
+C       o    o LL     o    o R   R S
+C       o    o LL     o    o RRRR  SSSSS
+C       o    o LL     o    o R RR      S
+ CCCCCC  oooo  LLLLLL  oooo  R   R SSSSS
+
+The use of this file is simply to create some colors we can reuse throughout the css and orginise it in a place where the declarations won't clutter us :)
+*/
 @property --w-bg {
 	syntax: "<color>";
 	inherits: false;

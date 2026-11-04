@@ -1,0 +1,160 @@
+@import url('../style/colors.css');
+/*
+BBBB      A      CCCCCC K  K  GGGGGGG K  K RRRR   oooo  N   N DDDDD
+B   B    A A    C       K K  G        K K  R   R o    o NN  N D    D
+BBBB    A   A   C       KK   G    GGG KK   RRRR  o    o N N N D    D
+B   B  AAAAAAA  C       K K  G      G K K  R RR  o    o N  NN D    D
+BBBB  A       A  CCCCCC K  K  GGGGGG  K  K R   R  oooo  N   N DDDDD
+====================================================================
+div#background
+	div.row
+		div.item
+img#cloud-1
+img#cloud-2
+img#cloud-3
+img#cloud-4
+*/
+
+/*
+ * #background is at the bottom of the z stack, hence zindex 0
+ * #background is positioned fixed to the top left corner with 0 offset
+ * #background maintains 100% of inner screen dimensions
+ * Background color --w-bg from colors.css
+ * #background is a flexbox column(vertical flow) with space-between horizontal alignment
+	* .row is a flexbox row(horizontal flow) vertically aligned to center and space-between Horizontally
+		* .item is a div with a background image declared in css
+		* .item gets background image of hook, with no repeat
+		* .item is barebones because most of the styling, like width and height is in script/website-background.js
+*/
+#background {
+	/*bottom of z stack*/
+	z-index: 0;
+
+	/*fixed top left corner of inner screen*/
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	/*100% of body dimensions*/
+	width: 100%;
+	height: 100%;
+
+	background-color: var(--w-bg);
+
+	/*flexbox column, vertical flow*/
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+
+	.row {
+		/*flexbox row, horizontal flow*/
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+
+		/*Only has background-image in stylesheet, rest is handled in script/website-background.js*/
+		.item {
+			background-image: url("../assets/images/hook.svg");
+			background-repeat: no-repeat;
+		}
+
+		/*play animation on hover*/
+		.item:hover {
+			animation-name: wiggle;
+			animation-duration: 1s;
+			animation-timing-function: ease;
+			animation-iteration-count: infinite;
+			animation-delay: 0s;
+		}
+	}
+}
+/*Animation that scales and rotates element back and forth, between 3 phasers
+ * phaser.js am I right ;)*/
+@keyframes wiggle {
+	0%, 100% { transform: scale(1) rotate(0); }
+	25% { transform: scale(1.2) rotate(45deg); }
+	75% { transform: scale(1.2) rotate(45deg); }
+}
+
+/*
+ * #cloud-{1,2,3,4} are fixed at the four corners of the screen
+ * #cloud-{1,2,3,4} have varying scale, and they shrink to screen dimensions
+ * #cloud-{1,2,3,4} have animations cloudMoveRight or cloudMoveLeft depending on their corner
+*/
+#cloud-1, #cloud-2, #cloud-3, #cloud-4 {
+	/*bottom of stack*/
+	z-index: 0;
+	/*fixed position*/
+	position: fixed;
+}
+#cloud-1 {
+	/*top left corner*/
+	top: 10%;
+	left: 5%;
+	/*Animation duration, for cloudMoveRight*/
+	animation-duration: 10s;
+	min-width: 1rem;
+	/*base width, and max-width.  will shrink to inner screen dimensions*/
+	width: 12%;
+	max-width: 300px;
+}
+#cloud-2 {
+	/*top right corner*/
+	top: 16%;
+	right: 1%;
+	/*Animation duration, for cloudMoveLeft*/
+	animation-duration: 10s;
+	min-width: 1rem;
+	/*base width, and max-width.  will shrink to inner screen dimensions*/
+	width: 10%;
+	max-width: 129px;
+}
+#cloud-3 {
+	/*bottom left corner*/
+	bottom: 12%;
+	left: 1%;
+	/*Animation duration, for cloudMoveRight*/
+	animation-duration: 9s;
+	min-width: 1rem;
+	/*base width, and max-width.  will shrink to inner screen dimensions*/
+	width: 13%;
+	max-width: 270px;
+}
+#cloud-4 {
+	/*bottom right corner*/
+	bottom: 10%;
+	right: 6%;
+	/*Animation duration, for cloudMoveLeft*/
+	animation-duration: 20s;
+	min-width: 1rem;
+	/*base width, and max-width.  will shrink to inner screen dimensions*/
+	width: 25%;
+	max-width: 300px;
+}
+/*Animation for clouds in left corner, they'll move to the right*/
+#cloud-1, #cloud-3 {
+	animation-name: cloudMoveRight;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 0s;
+}
+/*Animation for clouds in right corner, they'll move to the left*/
+#cloud-2, #cloud-4 {
+	animation-name: cloudMoveLeft;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-delay: 0s;
+}
+/*Animation that translates cloud on x-axis to the positive x-axis
+ * from left to right*/
+@keyframes cloudMoveRight {
+	0%, 100% { translate: 0 0; }
+	50% { translate: 100px 0; }
+}
+/*Animation that translates cloud on x-axis to the positive y-axis
+ * from right to left*/
+@keyframes cloudMoveLeft {
+	0%, 100% { translate: 0 0; }
+	50% { translate: -100px 0; }
+}

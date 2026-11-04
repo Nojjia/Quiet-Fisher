@@ -1,0 +1,95 @@
+@import url('../style/colors.css');
+/*
+ GGGGGG      A     M   M EEEEEE
+G           A A    MM MM E
+G    GGG   A   A   M M M EEEEE
+G      G  AAAAAAA  M   M E
+ GGGGGG  A       A M   M EEEEEE
+===============================
+main#main
+	div#game-area
+		div#game
+		table#game-guide
+			tr
+				td
+					p
+					br
+					span.nf.nf-md-alpha_e_box
+					span.nf.nf-md-alpha_w_box
+					span.nf.nf-md-alpha_a_box
+					span.nf.nf-md-alpha_s_box
+					span.nf.nf-md-alpha_d_box
+					span.nf.nf-md-alpha_z_box
+					span.nf.nf-md-alpha_x_box
+					span.nf.nf-md-alpha_c_box
+					span.nf.nf-md-alpha_v_box
+					span.nf.nf-md-alpha_b_box
+					span.nf.nf-md-alpha_n_box
+					span.nf.nf-md-alpha_m_box
+					span.nf.nf-md-alpha_q_box
+					span.nf.nf-md-alpha_r_box
+					span.nf.nf-md-alpha_t_box
+					span.nf.nf-md-arrow_{up,left,down,right}_bold_box_outline
+					span.nf.nf-md-alpha_e_box
+				td.game-guide-description
+*/
+
+/*
+ * #game-area contains all elements for the game, i.e, #game for phaser to load game and #game-guide for descriptions and guide of game
+ * #game-area is a flexbox row(hozizontal flow)
+ * #game-area Overwrites it's inherited width from main to 100 viewport width
+	* #game has a rounder border, and everything else is handled in javascript for it
+	* #game-guide is a table with a --w-fg background color
+	* #game-guide has spans that show nerdfont icons
+	* #game-guide has #game-guide-description, for description of what a key does
+	* on hover the spans changes color fromw white to red
+	* on hover the #game-guide-description goes from --dark-blue to --sky-blue
+*/
+#game-area {
+	/*flexbox row, hozizontal flow*/
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+
+	/*don't use main's size, use 100% of viewport width instead*/
+	width: 100vw;
+
+	/*unset all rules for #game, if any were set, then create a border and round it*/
+	#game {
+		all: unset;
+		border: 10px solid var(--w-fg);
+		border-radius: 10px;
+	}
+
+	/*This is the table #game-guide*/
+	#game-guide {
+		background-color: var(--w-fg);
+
+		/*add padding and round to make it more appealing to look at*/
+		padding: 1em;
+		border-radius: 1em;
+
+		/*make br a block element so that it's height(margin-top is used) can be changed)*/
+		br {
+			display: block;
+			margin-top: 5px;
+		}
+
+		/*for all tr, except the last, for it's td, create a bottom border*/
+		tr:not(tr:last-child) td { border-bottom: thin solid var(--w-bg); }
+
+		/*for all tr's td, except last td, create a right border*/
+		tr td:not(td:last-child) { border-right: thin solid var(--w-bg-offset); }
+
+		/*make nerdfonts 2rem in size*/
+		.nf { font-size: 2rem; }
+
+		/*make nerdfonts change color on hover*/
+		.nf:hover { color: red; }
+
+		/*make text descriptions of keys(nerdfont class) dark blue and sky blue on hover*/
+		.game-guide-description { color: var(--dark-blue); }
+		.game-guide-description:hover { color: var(--sky-blue); }
+	}
+}

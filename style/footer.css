@@ -1,41 +1,63 @@
 @import url('../style/colors.css');
 /*
-footer .footer
-	div .footer-left
-		a .icon .nf .nf-cod-mail
-		a .icon .nf .nf-fa-discord
-	div .footer-right
-		a .icon .nf .nf-md-web
-		a .icon .nf .nf-linux-codeberg
-		a .icon .nf .nf-cod-github
+FFFFFF  OOO   OOO  TTTTTTTT EEEEEE RRRR
+F      O   O O   O    TT    E      R   R
+FFFFF  O   O O   O    TT    EEEEE  RRRR
+F      O   O O   O    TT    E      R RR
+F       OOO   OOO     TT    EEEEEE R   R
+========================================
+footer.footer
+	div.footer-left
+		a.icon.nf.nf-cod-mail
+		a.icon.nf.nf-fa-discord
+	div.footer-right
+		a.icon.nf.nf-md-web
+		a.icon.nf.nf-linux-codeberg
+		a.icon.nf.nf-cod-github
 */
-footer {
+
+/*
+ * #footer is at the bottom of the body's stack.  It get's aligned there by body's flexbow column
+ * #footer is a flexbox row(horizontal alignment) with space-between horizontal alignment, and central vertical alignement
+ * #footer takes 100% of body's width
+	* #footer-{left,right} are the left and right containers inside #footer
+	* #footer-{left,right} are both flexbox rows, with a gap of 10px between their children
+	* #footer-{left,right} have bottom margin of 10px
+		* .icon represent each element inside the footer
+		* each .icon is styled individually using nerdfonts nf-* class
+*/
+#footer {
+	/*take 100% of body's width*/
 	width: 100%;
+
+	/*flexbox row, horizontal flow*/
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
 
-	/* General properties for footer left and right */
+	/*styling for both left container and right container inside footer*/
 	#footer-left, #footer-right {
+		/*flexbox row, horizontal flow*/
 		display: flex;
 		flex-flow: row nowrap;
 
-		gap: 10px; /*each element in footer's child has 10px gap*/
-
+		/*each element in footer's child has 10px gap*/
+		gap: 10px;
 		margin-bottom: 10px;
 
+		/*style all icons*/
 		.icon {
 			font-size: 30px;
 			color: var(--w-fg);
-			/* Gives icon touch area 20px top and bottom */
-			padding: 20px 0;
-	
+			/*remove text-decoration, since it was originally a link*/
 			text-decoration: none;
+			/*Expands icons' touch area 20px vertically*/
+			padding: 20px 0;
 		}
-	
+
+		/*on hover of icon play a base animation.  Color is changed individually*/
 		.icon:hover {
-			color: var(--sky-blue);
 			animation-name: moveUpDown;
 			animation-duration: 2s;
 			animation-delay: 0s;
@@ -43,38 +65,40 @@ footer {
 			animation-timing-function: ease;
 		}
 
-		.nf-cod-mail:hover {
-			color: #ffc8dd;
-		}
+		/*on hover change only color of mail icon*/
+		.nf-cod-mail:hover { color: #ffc8dd; }
+
+		/*on hover change color of discord icon, and switch animation for rotation one*/
 		.nf-fa-discord:hover {
+			color: #7289DA;
 			animation-name: rotate180;
 			animation-duration: 2s;
 			animation-delay: 0s;
 			animation-iteration-count: infinite;
 			animation-timing-function: ease;
-			color: #7289DA;
 		}
+
+		/*on hover change background color to an image, linear gradient for personal website*/
 		.nf-md-web:hover {
 			background-image: linear-gradient(to bottom, red, blue);
 			-webkit-text-fill-color: transparent;
 			-webkit-background-clip: text;
 		}
-		.nf-linux-codeberg:hover {
-			color: #44ADFF;
-		}
-		.nf-cod-github:hover {
-			color: white;
-		}
+
+		/*on hover change color of codeberg icon*/
+		.nf-linux-codeberg:hover { color: #44ADFF; }
+
+		/*on hover change color of github icon*/
+		.nf-cod-github:hover { color: white; }
 	}
 
-	#footer-left {
-		margin-left: 20px;
-	}
-	#footer-right {
-		margin-right: 20px;
-	}
+	/*Individual styling for left and right footer*/
+	#footer-left { margin-left: 20px; }
+	#footer-right { margin-right: 20px; }
 }
 
+/*Animation that translates element on y-axis, into negative y-axis
+ * from base to up, back down to base*/
 @keyframes moveUpDown {
 	0%, 100% {
 		transform: translateY(0);
@@ -84,6 +108,7 @@ footer {
 	}
 }
 
+/*Animation that rotates an element 180degress then back to 0*/
 @keyframes rotate180 {
 	0%, 100% {
 		transform: rotateZ(0);

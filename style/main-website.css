@@ -1,148 +1,60 @@
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/iosevka@5.3.0/index.css');
 @import url('https://www.nerdfonts.com/assets/css/webfont.css');
 @import url('../style/colors.css');
+@import url('../style/background.css');
 @import url('../style/footer.css');
 @import url('../style/navbar.css');
 
+/*
+ GGGGGG  EEEEEE N   N EEEEEE RRRR      A     LL
+G        E      NN  N E      R   R    A A    LL
+G    GGG EEEEE  N N N EEEEE  RRRR    A   A   LL
+G      G E      N  NN E      R RR   AAAAAAA  LL
+ GGGGGG  EEEEEE N   N EEEEEE R   R A       A LLLLLL
+===================================================
+html
+	head
+	body
+		header#navbar
+		main#main
+		footer#footer
+*/
+
+/* Set default color to white for all elements
+ * Give all elements z-index 1, that is, they appear in front*/
 * {
 	color: white;
 	z-index: 1;
 }
 
+/* Set height and width of body to inner screen dimensions
+ * Overwrite any margins and paddings to 0
+ * Make body a a flex columns
+	 * Horizontal alignment is, a set space between each element
+	 * Vertical alignment is, center
+*/
 body {
 	width: 100vw;
 	height: 100vh;
-
 	margin: 0;
 	padding: 0;
-
-	/*box-sizing: border-box;*/
-
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-between;
 	align-items: center;
-
-	background-color: var(--w-bg, #121212ff);
 }
 
-#background {
-	z-index: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: transparent;
-
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: space-between;
-
-	.row {
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		align-items: center;
-		.item {
-			background-image: url("../assets/images/hook.svg");
-			background-repeat: no-repeat;
-		}
-
-		.item:hover {
-			animation-name: wiggle;
-			animation-duration: 1s;
-			animation-timing-function: ease;
-			animation-iteration-count: infinite;
-			animation-delay: 0s;
-		}
-	}
-}
-.background {
-	z-index: 0;
-	position: fixed;
-}
-#cloud-1 {
-	top: 10%;
-	left: 5%;
-
-	animation-duration: 10s;
-
-	min-width: 1rem;
-	width: 12%;
-	max-width: 300px;
-}
-#cloud-2 {
-	top: 16%;
-	right: 1%;
-
-	animation-duration: 10s;
-
-	min-width: 1rem;
-	width: 10%;
-	max-width: 129px;
-}
-
-#cloud-3 {
-	bottom: 12%;
-	left: 1%;
-
-	animation-duration: 9s;
-
-	min-width: 1rem;
-	width: 13%;
-	max-width: 270px;
-}
-
-#cloud-4 {
-	bottom: 10%;
-	right: 6%;
-
-	animation-duration: 20s;
-
-	min-width: 1rem;
-	width: 25%;
-	max-width: 300px;
-}
-
-#cloud-1, #cloud-3 {
-	animation-name: cloudMoveRight;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-delay: 0s;
-}
-
-#cloud-2, #cloud-4 {
-	animation-name: cloudMoveLeft;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-delay: 0s;
-}
-
-@keyframes cloudMoveRight {
-	0%, 100% {
-		translate: 0 0;
-	}
-
-	50% {
-		translate: 100px 0;
-	}
-}
-
-@keyframes cloudMoveLeft {
-	0%, 100% {
-		translate: 0 0;
-	}
-
-	50% {
-		translate: -100px 0;
-	}
-}
-
+/*
+ * main is a flexbox columns(vertical flow)
+ * further styling is split into account.css, leaderboard.css and game.css
+*/
 #main {
+	/*main in a flexbox column, vertical flow*/
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+
+	/*Logo shown in index.html*/
 	#logo-compact {
 		background-image: url('../assets/images/logo-compact.svg');
 		background-size: 100px 100px;
@@ -157,281 +69,26 @@ body {
 		border-radius: 10px;
 	
 		font-family: 'Iosevka', monospace;
+	
 		transition: filter 0.3s ease;
-	
-		#account {
-			max-width: 500px;
-
-			display: grid;
-			grid-template-areas:
-				"title title"
-				"input-area input-area"
-				"link-left link-right"
-				"submit submit";
-			grid-template-columns: 1fr 1fr;
-	
-			margin: 0 40px;
-	
-			.constraint {
-				padding: 0;
-				margin: 0;
-				font-size: 0.7rem;
-			}
-	
-			.title {
-				grid-area: title;
-	
-				margin-top: 36px;
-	
-				text-align: center;
-	
-				font-size: 2rem;
-				font-weight: bold;
-			}
-	
-			.input-area {
-				grid-area: input-area;
-	
-				font-size: 2rem;
-	
-				input, .phone {
-					box-sizing: border-box;
-					width: 100%;
-					height: 80px;
-	
-					margin-top: 15px;
-	
-					border: none;
-					border-radius: 10px;
-	
-					font-size: 1.5rem;
-					background-color: var(--w-bg);
-	
-					padding: 0 1rem;
-				}
-		
-				input::placeholder {
-					color: var(--w-bg-offset);
-				}
-	
-				input:focus {
-					border: none;
-					outline: 2px solid var(--w-fg);
-				}
-	
-				.phone {
-					display: flex;
-					flex-flow: row nowrap;
-					background-color: unset;
-					justify-content: space-between;
-					padding: 0;
-	
-					#phone-country {
-						background-color: var(--w-bg);
-						width: 100px;
-	
-						/*border: none;*/
-						border-radius: 10px;
-						border: none;
-	
-						padding: 0 0.5rem;
-						margin-right: 1rem;
-	
-						font-size: 1rem;
-					}
-	
-					#phone-number {
-						margin-top: 0;
-					}
-				}
-	
-				#password-issue {
-					text-align: right;
-					font-size: 1rem;
-					color: red;
-				}
-			}
-	
-			.link-left {
-				text-align: left;
-				grid-area: link-left;
-			}
-	
-			.link-right {
-				text-align: right;
-				grid-area: link-right;
-			}
-	
-			.link-left, .link-right {
-				margin-top: 15px;
-				color: #ffc400ff;
-			}
-	
-			.submit {
-				grid-area: submit;
-	
-	
-				width: 160px;
-				height: 70px;
-	
-				display: inline-block;
-				margin: 15px auto 36px auto;
-			}
-		}
-	}
-
-	#leaderboard_levels {
-		width: 100%;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-evenly;
-		align-items: center;
-		margin: 0;
-		padding: 0;
-
-		#level_1, #level_2, #level_3 {
-			margin-top: 20px;
-
-			user-select: none;
-
-			background-image: linear-gradient(to bottom right, black, red, black);
-			background-size: 200% 200%;
-			padding: 20px;
-			border-radius: 10px;
-			cursor: pointer;
-		}
-
-		#level_1:hover, #level_2:hover, #level_3:hover {
-			animation-name: gradientMoveBackground;
-			outline: 2px inset darkred;
-			animation-duration: 2s;
-			animation-timing-function: ease;
-			animation-delay: 0s;
-			animation-iteration-count: infinite;
-		}
-	}
-
-	#leaderboard_table {
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-
-		display: flex;
-		flex-flow: column nowrap;
-		align-items: center;
-
-		padding: 20px;
-	
-		.heading {
-			font-family: 'sans-serif';
-			font-weight: bold;
-		}
-
-		#leaderboard_heading {
-			background-image: linear-gradient(to bottom, #00000044, transparent);
-		}
-	
-		#leaderboard_heading, .leaderboard_row {
-			width: 100%;
-			box-sizing: border-box;
-
-			border-radius: 10px;
-
-			padding: 20px;
-
-			margin-bottom: 10px;
-
-			display: grid;
-			grid-template-columns: 3em 400px 300px;
-			align-items: center;
-			justify-content: start;
-
-			.leaderboard_index {
-				text-align: left;
-			}
-
-			.leaderboard_username {
-				text-align: left;
-			}
-
-			.leaderboard_time, #leaderboard_time_title {
-				text-align: right;
-				width: 300px;
-			}
-
-			#leaderboard_username_title {color: #5F9EA0;}
-			#leaderboard_time_title {color: #8A2BE2;}
-		}
-
-		.leaderboard_row:nth-child(even) {
-			background-color: #00000044;
-		}
-
-		.leaderboard_row:hover {
-			background-color: #00000077;
-		}
-
-	}
-
-	#card:hover {
-		filter: drop-shadow(0px 0px 10px #001a03ff);
 	}
 }
 
-@keyframes gradientMoveBackground {
-	0%, 100% {
-		background-position: 0% 0%;
-	}
-
-	50% {
-		background-position: 100% 100%;
-	}
-}
-
-
+/*General styling for all buttons*/
 .button {
 	user-select: none;
-
 	font-family: 'Iosevka', monospace;
-	/*
-	font-weight: 400;
-	font-style: normal;
-	font-size: 1.5rem;
-	*/
-
 	padding: 10px;
-
 	background-color: var(--w-bg-offset, grey);
 	color: var(--w-fg, white);
-
 	border-radius: 10px;
 	outline: 2px solid var(--w-fg);
-	/*outline-style: dotted/dashed/solid/double/groove/ridge;*/
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	text-decoration: none;
 }
-
 .button:hover {
 	color: red;
 	background-color: #2D2D2D;
 }
-
-@keyframes wiggle {
-	0%, 100% {
-		transform: scale(1) rotate(0);
-	}
-	25% {
-		transform: scale(1.2) rotate(45deg);
-	}
-	50% {
-		transform: scale(1.2) rotate(-45deg);
-	}
-	75% {
-		transform: scale(1.2) rotate(45deg);
-	}
-}
-

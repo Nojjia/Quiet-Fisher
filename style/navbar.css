@@ -1,25 +1,39 @@
 @import url('../style/colors.css');
 /*
-header .navbar
-	div .left
-		a .button .guest
-	div .center
-		a .home
+N   N     A     V       V BBBB      A     RRRR
+NN  N    A A     V     V  B   B    A A    R   R
+N N N   A   A     V   V   BBBB    A   A   RRRR
+N  NN  AAAAAAA     V V    B   B  AAAAAAA  R RR
+N   N A       A     V     BBBB  A       A R   R
+===============================================
+header.navbar
+	div.left
+		a.button.guest
+	div.center
+		a.home
 			img
-		img .game-title
-		a .leaderboard
+		img.game-title
+		a.leaderboard
 			img
-	div .right
-		a .button .login
-		a .button .signup
+	div.right
+		a.button.login
+		a.button.signup
+*/
+
+/*
+ * #navbar consists of 3 sections, the left, center and right
+ * #navbar is a gridbox, with 3 cells for the 3 sections, where left and right should occupy 1 equal fraction of space each, and center automatically takes the rest
+ * #navbar is sticky to top left coner(top of screen), so it will stick to top after we scroll past any previous elements(currently none, but incase we add some sort of warning later for phaser's drawing system's support
+ * #navbar is positioned at the absolute top of the z stack, at zindex 3
+ * #navbar takes up 100% of body width
+ * #navbar has 10px padding and uses box-sizing: border-box to include that padding when calculating dimensions of #navbar
+ * A background image of a gradient is set, going from top black to bottom transparent, with a blur filter to make it more appealing to look at when scrolling
 */
 #navbar {
-	/*Stop user from being to select the elements in the navbar*/
-	user-select: none;
+	/*Anchor to top of zstack*/
+	z-index: 3;
 
-
-	/*Anchor to SCREEN top and pin to front*/
-	z-index: 9999;
+	/*Anchor to top of screen*/
 	position: sticky;
 	top: 0;
 	left: 0;
@@ -28,11 +42,13 @@ header .navbar
 	min-width: 100%;
 	max-width: 100%;
 	max-height: 5rem;
-	/*Indlude padding in size*/
+
+	/*Indlude padding when calculating navbar's dimensions*/
 	box-sizing: border-box;
 	padding: 10px;
 
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),  rgba(0, 0, 0, 0.5), transparent);
+	/*Add a gradient background image and blur the background of the navbar*/
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
 	backdrop-filter: blur(6px);
 
 	/*
@@ -63,7 +79,6 @@ header .navbar
 	#right {justify-content: flex-end;}
 
 	#center {
-		/*https://stackoverflow.com/questions/35782960/zoom-in-on-hover-image-and-keep-same-size*/
 		#home img, #leaderboard img {
 			display: block;
 			height: 2rem;

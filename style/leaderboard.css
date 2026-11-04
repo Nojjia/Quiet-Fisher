@@ -1,0 +1,110 @@
+@import url('../style/colors.css');
+/*
+LL     EEEEEE     A     DDDDD  EEEEEE RRRR  BBBB   oooo  RRRR  DDDDD
+LL     E         A A    D    D E      R   R B   B o    o R   R D    D
+LL     EEEEE    A   A   D    D EEEEE  RRRR  BBBB  o    o RRRR  D    D
+LL     E       AAAAAAA  D    D E      R RR  B   B o    o R RR  D    D
+LLLLLL EEEEEE A       A DDDDD  EEEEEE R   R BBBB   oooo  R   R DDDDD
+=====================================================================
+main#main
+	div#card
+		div#leaderboard_levels
+			div#level_1
+			div#level_2
+			div#level_3
+		div#leaderboard_table
+			div#leaderboard_heading
+				div#leaderboard_index_title
+				div#leaderboard_username_title
+				div#leaderboard_time_title
+			div#leaderboard_table_body
+				div.leaderboard_row
+					div.leaderboard_index
+					div.leaderboard_username
+					div.leaderboard_time
+*/
+
+/*
+*/
+#leaderboard_levels {
+	width: 100%;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+
+	margin: 0;
+	padding: 0;
+
+	#level_1, #level_2, #level_3 {
+		margin-top: 20px;
+
+		user-select: none;
+		cursor: pointer;
+
+		background-image: linear-gradient(to bottom right, black, red, black);
+		background-size: 200% 200%;
+		padding: 20px;
+		border-radius: 10px;
+	}
+
+	#level_1:hover, #level_2:hover, #level_3:hover {
+		animation-name: gradientMoveBackground;
+		outline: 2px inset darkred;
+		animation-duration: 2s;
+		animation-timing-function: ease;
+		animation-delay: 0s;
+		animation-iteration-count: infinite;
+	}
+}
+
+#leaderboard_table {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 20px;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+
+	user-select: none;
+
+	#leaderboard_heading { background-image: linear-gradient(to bottom, #00000044, transparent); }
+
+	#leaderboard_heading, .leaderboard_row {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 20px;
+		margin-bottom: 10px;
+		border-radius: 10px;
+
+		display: grid;
+		grid-template-columns: 3em 400px 300px;
+		align-items: center;
+		justify-content: start;
+
+		.leaderboard_index { text-align: left; }
+
+		.leaderboard_username { text-align: left; }
+
+		.leaderboard_time, #leaderboard_time_title {
+			text-align: right;
+			width: 300px;
+		}
+
+		#leaderboard_username_title {color: #5F9EA0;}
+
+		#leaderboard_time_title {color: #8A2BE2;}
+	}
+
+	.leaderboard_row:nth-child(even) { background-color: #00000044; }
+
+	.leaderboard_row:hover { background-color: #00000077; }
+}
+
+@keyframes gradientMoveBackground {
+	0%, 100% { background-position: 0% 0%; }
+	50% { background-position: 100% 100%; }
+}

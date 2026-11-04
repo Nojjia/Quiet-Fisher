@@ -2,24 +2,36 @@
 <html lang="en">
 <head>
 	<base href="../../">
+	<!--Search Engine optimizations-->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="author" content="nojjia">
 	<meta name="description" content="Quiet Fisher - A game about fishing in a peacefull lake.  But, as you move to deeper levels, some secrets get uncovered...">
 
 	<title>Game Page - Quiet Fisher</title>
+
+	<!--run JavaScript modules-->
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 	<link rel="stylesheet" href="style/main-website.css">
+	<link rel="stylesheet" href="style/game.css">
 
+	<!--load phaser.js framework and run JavaScript modules-->
 	<script src="//cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.js"></script>
 	<script type="module" src="script/main.js"></script>
 </head>
 <body>
+	<!--
+		BBBB      A      CCCCCC K  K  GGGGGGG K  K RRRR   oooo  N   N DDDDD
+		B   B    A A    C       K K  G        K K  R   R o    o NN  N D    D
+		BBBB    A   A   C       KK   G    GGG KK   RRRR  o    o N N N D    D
+		B   B  AAAAAAA  C       K K  G      G K K  R RR  o    o N  NN D    D
+		BBBB  A       A  CCCCCC K  K  GGGGGG  K  K R   R  oooo  N   N DDDDD
+	-->
 	<div id="background"></div>
-	<img class="background" id="cloud-1" src="assets/images/cloud-1.svg">
-	<img class="background" id="cloud-2" src="assets/images/cloud-2.svg">
-	<img class="background" id="cloud-3" src="assets/images/cloud-3.svg">
-	<img class="background" id="cloud-4" src="assets/images/cloud-4.svg">
+	<img id="cloud-1" src="assets/images/cloud-1.svg">
+	<img id="cloud-2" src="assets/images/cloud-2.svg">
+	<img id="cloud-3" src="assets/images/cloud-3.svg">
+	<img id="cloud-4" src="assets/images/cloud-4.svg">
 	<!--
 		N   N     A     V       V BBBB      A     RRRR
 		NN  N    A A     V     V  B   B    A A    R   R
@@ -53,6 +65,87 @@
 		M   M A       A IIIIIIII N   N
 	-->
 	<main id="main">
+		<div id='game-area'>
+			<!--
+				DIV IN WHICH PHASER CREATES GAME INSTANCE AND SCENES,
+				id is important, as it gets refered in script/game/main.js, configs.parent
+			-->
+			<div id='game'></div>
+			<!-- GAME DESCRIPTION -->
+			<table id='game-guide'>
+				<tr>
+					<td colspan='2'>
+						<p>Quiet Fisher is a reflexive game
+						<br>
+						Here are the controls, and keys you have to press for each level.
+						<br>
+						Each level has a timer for each key to press
+						<br>
+						When timer runs out, you get a time punishment
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class='nf nf-md-alpha_w_box'></span>
+						<span class='nf nf-md-alpha_a_box'></span>
+						<span class='nf nf-md-alpha_s_box'></span>
+						<span class='nf nf-md-alpha_d_box'></span>
+						<br>
+						<span class='nf nf-md-arrow_up_bold_box_outline'></span>
+						<span class='nf nf-md-arrow_left_bold_box_outline'></span>
+						<span class='nf nf-md-arrow_down_bold_box_outline'></span>
+						<span class='nf nf-md-arrow_right_bold_box_outline'></span>
+					</td>
+					<td class='game-guide-description'>Movement Keys</td>
+				</tr>
+				<tr>
+					<td>
+						<span class='nf nf-md-alpha_e_box'></span>
+					</td>
+					<td class='game-guide-description'>Trigger fishing mechanic</td>
+				</tr>
+				<tr>
+					<td>
+						<span class='nf nf-md-alpha_z_box'></span>
+						<span class='nf nf-md-alpha_x_box'></span>
+						<span class='nf nf-md-alpha_c_box'></span>
+						<span class='nf nf-md-alpha_v_box'></span>
+					</td>
+					<td class='game-guide-description'>Beginner Area, KEYS TO PRESS</td>
+				</tr>
+				<tr>
+					<td>
+						<span class='nf nf-md-alpha_z_box'></span>
+						<span class='nf nf-md-alpha_x_box'></span>
+						<span class='nf nf-md-alpha_c_box'></span>
+						<span class='nf nf-md-alpha_v_box'></span>
+						<br>
+						<span class='nf nf-md-alpha_b_box'></span>
+						<span class='nf nf-md-alpha_n_box'></span>
+						<span class='nf nf-md-alpha_m_box'></span>
+					</td>
+					<td class='game-guide-description'>Intermediate Area, KEYS TO PRESS</td>
+				</tr>
+				<tr>
+					<td>
+						<span class='nf nf-md-alpha_z_box'></span>
+						<span class='nf nf-md-alpha_x_box'></span>
+						<span class='nf nf-md-alpha_c_box'></span>
+						<span class='nf nf-md-alpha_v_box'></span>
+						<br>
+						<span class='nf nf-md-alpha_b_box'></span>
+						<span class='nf nf-md-alpha_n_box'></span>
+						<span class='nf nf-md-alpha_m_box'></span>
+						<br>
+						<span class='nf nf-md-alpha_q_box'></span>
+						<span class='nf nf-md-alpha_r_box'></span>
+						<span class='nf nf-md-alpha_t_box'></span>
+					</td>
+					<td class='game-guide-description'>Advanced Area, KEYS TO PRESS</td>
+				</tr>
+			</table>
+		</div>
 	</main>
 	<!--
 		FFFFFF  OOO   OOO  TTTTTTTT EEEEEE RRRR
@@ -61,7 +154,7 @@
 		F      O   O O   O    TT    E      R RR
 		F       OOO   OOO     TT    EEEEEE R   R
 	-->
-	<footer id=".footer">
+	<footer id="footer">
 		<div id="footer-left">
 			<a class="icon nf nf-cod-mail"href="mailto:nojjia@proton.me" ></a>
 			<a class="icon nf nf-fa-discord"href="https://discord.com/users/562641071159640084" ></a>

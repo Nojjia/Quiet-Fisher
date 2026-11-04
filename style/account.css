@@ -1,0 +1,116 @@
+@import url('../style/colors.css');
+/*
+    A      CCCCCC  CCCCCC  oooo  U    U N   N TTTTTTTT
+   A A    C       C       o    o U    U NN  N    TT
+  A   A   C       C       o    o U    U N N N    TT
+ AAAAAAA  C       C       o    o U    U N  NN    TT
+A       A  CCCCCC  CCCCCC  oooo   UUUU  N   N    TT
+======================================================
+main#main
+	div#card
+		div#account
+			div#title
+			div#input-area
+				label.account-label
+				label.account-label.constraint
+				input#username
+				input#email
+				input#age
+				input#address
+				input.phone#phone-country
+					option
+				input.phone#phone-number
+				input#password
+				input#confirm-password
+				div#password-issue
+			a#link-left
+			a#link-right
+			button#login
+			button#signup
+*/
+#account {
+	max-width: 500px;
+
+	display: grid;
+	grid-template-areas:
+		"title title"
+		"input-area input-area"
+		"link-left link-right"
+		"submit submit";
+	grid-template-columns: 1fr 1fr;
+
+	margin: 0 40px;
+
+	#title {
+		grid-area: title;
+		margin-top: 36px;
+		text-align: center;
+		font-size: 2rem;
+		font-weight: bold;
+	}
+	#input-area {
+		grid-area: input-area;
+		font-size: 2rem;
+
+		.constraint {
+			padding: 0;
+			margin: 0;
+			font-size: 0.7rem;
+		}
+
+		input, .phone {
+			box-sizing: border-box;
+			width: 100%;
+			height: 80px;
+			margin-top: 15px;
+			border: none;
+			border-radius: 10px;
+			font-size: 1.5rem;
+			background-color: var(--w-bg);
+			padding: 0 1rem;
+		}
+		input::placeholder { color: var(--w-bg-offset); }
+		input:focus { border: none; outline: 2px solid var(--w-fg); }
+
+		.phone {
+			display: flex;
+			flex-flow: row nowrap;
+			background-color: unset;
+			justify-content: space-between;
+			padding: 0;
+
+			#phone-country {
+				background-color: var(--w-bg);
+				width: 100px;
+				border-radius: 10px;
+				border: none;
+
+				padding: 0 0.5rem;
+				margin-right: 1rem;
+				font-size: 1rem;
+			}
+
+			#phone-number { margin-top: 0; }
+		}
+
+		#password-issue {
+			text-align: right;
+			font-size: 1rem;
+			color: red;
+		}
+	}
+
+	#link-left, #link-right { margin-top: 15px; color: #ffc400ff; }
+	#link-left { text-align: left; grid-area: link-left; }
+	#link-right { text-align: right; grid-area: link-right; }
+
+	.submit {
+		grid-area: submit;
+		width: 160px;
+		height: 70px;
+		display: inline-block;
+		margin: 15px auto 36px auto;
+	}
+}
+
+#card:hover { filter: drop-shadow(0px 0px 10px #001a03ff); }

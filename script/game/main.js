@@ -21,7 +21,7 @@ function init() {
 	/*PHASER GAME CONFIG*/
 	const config = {
 		type: Phaser.AUTO,
-		parent: 'main',
+		parent: 'game',
 		autoFocus: true,
 		disableContextMenu: true,
 		roundPixel: true,

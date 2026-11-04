@@ -8,7 +8,6 @@
 
 
 import './initiateLocalStorage.js';
-import './website-background.js';
 
 /*get location of current page to dynamically load appropriate module*/
 let currentPath = window.location.pathname;
@@ -40,3 +39,9 @@ switch (currentPath) {
 		console.log('No personalized module to load');
 		break;
 }
+
+/*
+	* Import last, to allow phaser, game/main.js to load
+	* That way scrollWidth includes phaser's game window too
+*/
+await import('./website-background.js');
