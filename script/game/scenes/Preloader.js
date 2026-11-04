@@ -2,10 +2,7 @@
 
 export class Preloader extends Phaser.Scene {
 	constructor() {
-		super({
-			key: 'Preloader',
-			loader: { baseURL: '../../../' }
-		});
+		super({ key: 'Preloader' });
 	}
 
 	init() {
@@ -58,6 +55,8 @@ export class Preloader extends Phaser.Scene {
 
 	preload() {
 		this.load.audio('background-music', 'assets/music/game-bg.mp3');
+		this.load.audio('fish-caught-music', 'assets/music/fish-caught.mp3');
+		this.load.audio('walk-sfx', 'assets/music/walk.mp3');
 
 		this.load.image('menu-background', 'assets/images/page.png');
 		this.load.image('button', 'assets/textures/nine-slice/button-menu.png');
@@ -68,10 +67,13 @@ export class Preloader extends Phaser.Scene {
 
 		this.load.tilemapTiledJSON('map-beginner', 'assets/textures/AreaBeginner.tmj');
 		this.load.tilemapTiledJSON('map-intermediate', 'assets/textures/AreaIntermediate.tmj');
+		this.load.tilemapTiledJSON('map-advanced', 'assets/textures/AreaAdvanced.tmj');
+
 		this.load.image('tileset-tree-small', 'assets/textures/tileset_14x34.png');
 		this.load.image('tileset-tree-big', 'assets/textures/tileset_32x50.png');
 		this.load.image('tileset-textures', 'assets/textures/tileset_32x32.png');
 		this.load.image('tileset-mountain', 'assets/textures/mountain.png');
+		this.load.image('tileset-volcano', 'assets/textures/volcano.png');
 
 		this.load.spritesheet('player', 'assets/sprites/player.png',
 			{ frameWidth: 32, frameHeight: 32}
@@ -83,6 +85,10 @@ export class Preloader extends Phaser.Scene {
 
 		this.load.spritesheet('fish-2', 'assets/sprites/fish-2.png',
 			{ frameWidth: 256, frameHeight: 97}
+		);
+
+		this.load.spritesheet('fish-3', 'assets/sprites/fish-3.png',
+			{ frameWidth: 300, frameHeight: 200}
 		);
 	}
 

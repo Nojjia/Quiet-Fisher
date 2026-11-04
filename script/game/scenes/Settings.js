@@ -2,10 +2,7 @@
 
 export class Settings extends Phaser.Scene {
 	constructor() {
-		super({
-			key: 'Settings',
-			loader: { baseURL: '../../../' }
-		});
+		super({ key: 'Settings' });
 	}
 
 	create() {

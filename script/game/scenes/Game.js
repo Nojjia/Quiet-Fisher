@@ -2,12 +2,7 @@
 
 export class Game extends Phaser.Scene {
 	constructor() {
-		super({
-			key: 'Game',
-			loader: {
-				baseURL: '../../..'
-			}
-		});
+		super({ key: 'Game' });
 	}
 
 	create() {

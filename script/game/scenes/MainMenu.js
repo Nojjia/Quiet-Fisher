@@ -4,10 +4,7 @@ export class MainMenu extends Phaser.Scene {
 	player;
 	boundary;
 	constructor() {
-		super({
-			key: 'MainMenu',
-			loader: { baseURL: '../../../' }
-		});
+		super({ key: 'MainMenu' });
 	}
 
 	create() {

@@ -2,10 +2,7 @@
 
 export class AreaIntermediate extends Phaser.Scene {
 	constructor() {
-		super({
-			key: 'AreaIntermediate',
-			loader: { baseURL: '../../../'}
-		});
+		super({ key: 'AreaIntermediate' });
 	}
 
 	create() {
@@ -14,6 +11,8 @@ export class AreaIntermediate extends Phaser.Scene {
 		this.user = (JSON.parse(localStorage.getItem('users')));
 		this.moveKey    = this.input.keyboard.addKeys('W,A,S,D');
 		this.moveCursor = this.input.keyboard.createCursorKeys();
+
+		this.walkAudio = this.sound.add('walk-sfx');
 
 		/*
 			* CREATE TILEMAP FOR BEGINNER AREA
@@ -99,8 +98,11 @@ export class AreaIntermediate extends Phaser.Scene {
 
 		if (this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0 ) {
 			this.player.anims.play('walk', true);
+			if (!this.walkAudio.isPlaying)
+				this.walkAudio.play({ volume: localStorage.getItem('volumeSFX'), loop: true })
 		} else {
 			this.player.anims.play('still', true);
+			this.walkAudio.stop()
 		}
 	}
 
@@ -145,6 +147,10 @@ export class AreaIntermediate extends Phaser.Scene {
 		}
 
 		if (!tile) return;
+
+		/*Music to play when matching fish*/
+		let fishCaughtSFX = this.sound.add('fish-caught-music');
+		fishCaughtSFX.play({ volume: localStorage.getItem('volumeSFX') });
 
 		/*Draw a line(the fishing line) from user to any point on the water map*/
 		/*Bug to fix later on - Improve boundaries for rod to land on, right now it lands on soil as well*/
@@ -212,7 +218,7 @@ export class AreaIntermediate extends Phaser.Scene {
 			backgroundColor: 'black'
 		});
 
-		let timeLeft = 40000;
+		let timeLeft = 60000;
 		const TIME_START = this.time.now;
 		const DIFFICULTY_SETTER = 5000; // The time allowed between key press: 5secs rn
 		const TIME_REWARD = 5000;
@@ -260,9 +266,13 @@ export class AreaIntermediate extends Phaser.Scene {
 				console.log("DECREASE REMAINING TIME");
 				timeLeft -= TIME_REWARD;
 			}
-
 			else if (event.code === 'KeyW' || event.code === 'KeyA' ||
-				event.code === 'KeyS' || event.code === 'KeyD') {
+				event.code === 'KeyS' || event.code === 'KeyD' ||
+				this.moveCursor.left.isDown ||
+				this.moveCursor.right.isDown ||
+				this.moveCursor.down.isDown ||
+				this.moveCursor.up.isDown
+			) {
 				console.log("STOP FISHING");
 				rod.destroy();
 				PROGRESS_BAR.bar.destroy();
@@ -273,6 +283,7 @@ export class AreaIntermediate extends Phaser.Scene {
 				showMistakes.destroy();
 				blinkTween = null;
 				fish.destroy();
+				fishCaughtSFX.stop();
 				this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 				return;
 			}
@@ -311,6 +322,7 @@ export class AreaIntermediate extends Phaser.Scene {
 					showMistakes.destroy();
 					blinkTween = null;
 					fish.destroy();
+					fishCaughtSFX.stop();
 					this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 
 					if (this.username === 'guest') {

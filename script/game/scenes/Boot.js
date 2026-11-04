@@ -6,10 +6,7 @@
 */
 export class Boot extends Phaser.Scene {
 	constructor () {
-		super({
-			key: 'Boot',
-			loader: { baseURL: '../../../' }
-		});
+		super({ key: 'Boot' });
 	}
 
 	preload() {
@@ -31,10 +28,6 @@ export class Boot extends Phaser.Scene {
 	}
 
 	create() {
-
 		this.scene.start('Preloader');
-	}
-
-	update() {
 	}
 }
