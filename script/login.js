@@ -58,7 +58,7 @@ function validateLogin(USER_INPUT, message) {
 	*/
 	message.textContent = "Logged In";
 	sessionStorage.user = USER_INPUT.username.value;
-	window.location.assign("../../pages/game/menu.html");
+	window.location.assign("pages/game/menu.html");
 }
 
 /* clearError

@@ -140,7 +140,7 @@ function validateSignup(USER_INPUT, message) {
 	users[USER_INPUT.username.value] = USER;
 	localStorage.users = JSON.stringify(users);
 	sessionStorage.user = USER_INPUT.username.value;
-	window.location.assign("../../pages/game/menu.html");
+	window.location.assign("pages/game/menu.html");
 }
 
 /* clearError
