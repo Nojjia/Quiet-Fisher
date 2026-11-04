@@ -13,7 +13,13 @@ export class AreaBeginner extends Phaser.Scene {
 		this.moveKey    = this.input.keyboard.addKeys('W,A,S,D');
 		this.moveCursor = this.input.keyboard.createCursorKeys();
 
+		/*
+			* walkAudio <= audio played on wasd, or up down left right key press
+			* fishCaughtSFX <= audio played while catching fish (press e)
+		*/
 		this.walkAudio = this.sound.add('walk-sfx');
+		this.fishCaughtSFX = this.sound.add('fish-caught-music');
+		this.victorySFX = this.sound.add('victory-sfx');
 
 		/*
 			* CREATE TILEMAP FOR BEGINNER AREA
@@ -65,7 +71,10 @@ export class AreaBeginner extends Phaser.Scene {
 		this.fnThrowReel = this.keyThrowStone.on('down', () => {this.catchFish();});
 
 		/*BACK BUTTON FOR NAVIAGATION*/
-		this.createButton(10, 10, 'Areas', 16, 16, 100, 'button', () => { this.scene.start('Game'); })
+		this.createButton(10, 10, 'Areas', 16, 16, 100, 'button', () => {
+			this.fishCaughtSFX.stop();
+			this.scene.start('Game');
+		})
 	}
 
 	update() {
@@ -137,6 +146,8 @@ export class AreaBeginner extends Phaser.Scene {
 		* Else, if we are not near a water tile, we do nothing(so we exit)
 	*/
 	catchFish() {
+		if (this.currentlyFishing)
+			return;
 		/*Get tiles near user, drawing a square of 32x32*/
 		const TILE_NEAR_USER = this.mapLayer.water.getTilesWithinWorldXY(this.player.x, this.player.y, 32, 32);
 		/*tile varriable will hold first water tile in TILE_NEAR_USER*/
@@ -149,10 +160,11 @@ export class AreaBeginner extends Phaser.Scene {
 		}
 
 		if (!tile) return;
+		this.currentlyFishing = true;
 
 		/*Music to play when matching fish*/
-		let fishCaughtSFX = this.sound.add('fish-caught-music');
-		fishCaughtSFX.play({ volume: localStorage.getItem('volumeSFX') });
+		this.fishCaughtSFX.play({ volume: localStorage.getItem('volumeSFX'), loop: true });
+		this.registry.get('backgroundMusic').pause();
 
 		/*Draw a line(the fishing line) from user to any point on the water map*/
 		/*Bug to fix later on - Improve boundaries for rod to land on, right now it lands on soil as well*/
@@ -287,7 +299,9 @@ export class AreaBeginner extends Phaser.Scene {
 				showMistakes.destroy();
 				blinkTween = null;
 				fish.destroy();
-				fishCaughtSFX.stop();
+				this.fishCaughtSFX.stop();
+				this.registry.get('backgroundMusic').resume();
+				this.currentlyFishing = false;
 				this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 				return;
 			}
@@ -326,7 +340,10 @@ export class AreaBeginner extends Phaser.Scene {
 					showMistakes.destroy();
 					blinkTween = null;
 					fish.destroy();
-					fishCaughtSFX.stop();
+					this.fishCaughtSFX.stop();
+					this.victorySFX.play({ volume: localStorage.getItem('volumeSFX') });
+					this.registry.get('backgroundMusic').resume();
+					this.currentlyFishing = false;
 					this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 
 					if (this.username === 'guest') {

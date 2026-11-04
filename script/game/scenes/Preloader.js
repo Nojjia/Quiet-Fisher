@@ -57,6 +57,7 @@ export class Preloader extends Phaser.Scene {
 		this.load.audio('background-music', 'assets/music/game-bg.mp3');
 		this.load.audio('fish-caught-music', 'assets/music/fish-caught.mp3');
 		this.load.audio('walk-sfx', 'assets/music/walk.mp3');
+		this.load.audio('victory-sfx', 'assets/music/victory.mp3');
 
 		this.load.image('menu-background', 'assets/images/page.png');
 		this.load.image('button', 'assets/textures/nine-slice/button-menu.png');

@@ -146,7 +146,8 @@ export class Settings extends Phaser.Scene {
 			localStorage[element] = Number(value.toFixed(2));
 			let valueHuman = Math.round(localStorage[element] * 100) + '%';
 			VALUE_LABEL.setText(valueHuman);
-			this.registry.get('backgroundMusic').setVolume(value);
+			if (element === 'volumeMusic')
+				this.registry.get('backgroundMusic').setVolume(value);
 		});
 
 		return { bar: BAR, highlight: HIGHLIGHT, label: LABEL, value: VALUE_LABEL };

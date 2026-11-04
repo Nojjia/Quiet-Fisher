@@ -14,7 +14,13 @@ export class AreaAdvanced extends Phaser.Scene {
 		this.moveKey    = this.input.keyboard.addKeys('W,A,S,D');
 		this.moveCursor = this.input.keyboard.createCursorKeys();
 
+		/*
+			* walkAudio <= audio played on wasd, or up down left right key press
+			* fishCaughtSFX <= audio played while catching fish (press e)
+		*/
 		this.walkAudio = this.sound.add('walk-sfx');
+		this.fishCaughtSFX = this.sound.add('fish-caught-music');
+		this.victorySFX = this.sound.add('victory-sfx');
 
 		/*
 			* CREATE TILEMAP FOR BEGINNER AREA
@@ -72,7 +78,10 @@ export class AreaAdvanced extends Phaser.Scene {
 		this.fnThrowReel = this.keyThrowStone.on('down', () => {this.catchFish();});
 
 		/*BACK BUTTON FOR NAVIAGATION*/
-		this.createButton(10, 10, 'Areas', 16, 16, 100, 'button', () => { this.scene.start('Game'); });
+		this.createButton(10, 10, 'Areas', 16, 16, 100, 'button', () => {
+			this.fishCaughtSFX.stop();
+			this.scene.start('Game');
+		});
 	}
 
 	update() {
@@ -132,6 +141,8 @@ export class AreaAdvanced extends Phaser.Scene {
 	}
 
 	catchFish() {
+		if (this.currentlyFishing)
+			return;
 		/*Get tiles near user, drawing a square of 32x32*/
 		const TILE_NEAR_USER = this.mapLayer.water.getTilesWithinWorldXY(this.player.x - 32, this.player.y - 32, 64, 64);
 		/*tile varriable will hold first water tile in TILE_NEAR_USER*/
@@ -144,10 +155,11 @@ export class AreaAdvanced extends Phaser.Scene {
 		}
 
 		if (!tile) return;
+		this.currentlyFishing = true;
 
 		/*Music to play when matching fish*/
-		let fishCaughtSFX = this.sound.add('fish-caught-music');
-		fishCaughtSFX.play({ volume: localStorage.getItem('volumeSFX') });
+		this.fishCaughtSFX.play({ volume: localStorage.getItem('volumeSFX'), loop: true });
+		this.registry.get('backgroundMusic').pause();
 
 		/*Draw a line(the fishing line) from user to any point on the water map*/
 		/*Bug to fix later on - Improve boundaries for rod to land on, right now it lands on soil as well*/
@@ -189,8 +201,8 @@ export class AreaAdvanced extends Phaser.Scene {
 
 		/*SETS OF KEYS THAT USER MUST PRESS TO PROGRESS*/
 		const FISH_KEY = {
-			set: ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Q', 'E', 'R', 'T'],
-			input: this.input.keyboard.addKeys('Z,X,C,V,B,N,M,Q,E,R,T')
+			set: ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Q', 'R', 'T'],
+			input: this.input.keyboard.addKeys('Z,X,C,V,B,N,M,Q,R,T')
 		};
 		let keyToPress = Phaser.Math.Between(0, FISH_KEY.set.length - 1); //randomly choose key to press
 		let keycode = "Key" + FISH_KEY.set[keyToPress]; // creates the keycode
@@ -263,8 +275,10 @@ export class AreaAdvanced extends Phaser.Scene {
 				console.log("DECREASE REMAINING TIME");
 				timeLeft -= TIME_REWARD;
 			}
-			else if (event.code === 'KeyW' || event.code === 'KeyA' ||
-				event.code === 'KeyS' || event.code === 'KeyD' ||
+			else if (event.code === 'KeyW' ||
+				event.code === 'KeyA' ||
+				event.code === 'KeyS' ||
+				event.code === 'KeyD' ||
 				this.moveCursor.left.isDown ||
 				this.moveCursor.right.isDown ||
 				this.moveCursor.down.isDown ||
@@ -280,7 +294,9 @@ export class AreaAdvanced extends Phaser.Scene {
 				showMistakes.destroy();
 				blinkTween = null;
 				fish.destroy();
-				fishCaughtSFX.stop();
+				this.fishCaughtSFX.stop();
+				this.registry.get('backgroundMusic').resume();
+				this.currentlyFishing = false;
 				this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 				return;
 			}
@@ -319,7 +335,10 @@ export class AreaAdvanced extends Phaser.Scene {
 					showMistakes.destroy();
 					blinkTween = null;
 					fish.destroy();
-					fishCaughtSFX.stop();
+					this.fishCaughtSFX.stop();
+					this.victorySFX.play({ volume: localStorage.getItem('volumeSFX') });
+				this.registry.get('backgroundMusic').resume();
+				this.currentlyFishing = false;
 					this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 
 					if (this.username === 'guest') {
