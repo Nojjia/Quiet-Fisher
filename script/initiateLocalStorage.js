@@ -4,20 +4,33 @@
 	* users object and users.guest object must always exist
 	* Hence we always check if users and users.guest exist and create them
 */
-
 if (localStorage.users === undefined || JSON.parse(localStorage.users).guest == undefined) {
 	localStorage.users = (JSON.stringify({
 		'guest' : 0 
 	}));
 }
 
-/*
-	* In NAVBAR, there is GUEST button
-	* GUEST button always logs in as guest
-	* GUEST user's score is never recorder
-*/
-const guest = document.getElementById('guest-account');
-guest.addEventListener('click', () => {
-	sessionStorage.user = "guest";
-	console.log('login as guest');
-});
+function init() {
+	/*
+		* In NAVBAR, there is GUEST button
+		* GUEST button always logs in as guest
+		* GUEST user's score is never recorder
+	*/
+	const guest = document.getElementById('guest-account');
+	guest.addEventListener('click', () => {
+		sessionStorage.user = 'guest';
+		console.log('login as guest');
+	});
+
+	/*
+		* In NAVBAR, there is GAME button
+		* GAME button always logs in as registered user, not default GUEST
+	*/
+	const gamer = document.getElementById('go-to-game');
+	gamer.addEventListener('click', () => {
+		if (sessionStorage.getItem('user') === 'guest')
+			sessionStorage.user = '';
+	});
+}
+
+init();

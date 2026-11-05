@@ -13,9 +13,9 @@ export class Game extends Phaser.Scene {
 		this.createButton(10, 10, 'BACK', 16, 16, 100, 'button', () => { this.scene.start('MainMenu'); });
 
 		/*CREATE NAVIGATION BUTTON FOR EACH LEVEL*/
-		this.createLevel(1024 * 1/6, 384, 'BEGINNER', 'AreaBeginner'),
-		this.createLevel(1024 * 3/6, 384, 'INTERMEDIATE', 'AreaIntermediate'),
-		this.createLevel(1024 * 5/6, 384, 'ADVANCED', 'AreaAdvanced')
+		this.createLevel(1024 * 1/6, 384, 'level_1', 'BEGINNER', 'AreaBeginner'),
+		this.createLevel(1024 * 3/6, 384, 'level_2', 'INTERMEDIATE', 'AreaIntermediate'),
+		this.createLevel(1024 * 5/6, 384, 'level_3', 'ADVANCED', 'AreaAdvanced')
 	}
 
 	/*
@@ -56,7 +56,7 @@ export class Game extends Phaser.Scene {
 		* If user isnt guest, check level difficulty and fish caught in previous level
 			* grant access to level, if previouss level clear threshold reached
 	*/
-	createLevel(x, y, text, start) {
+	createLevel(x, y, level, text, start) {
 		/*Get users and username from storage, for username and fish caught validation*/
 		const USER = JSON.parse(localStorage.getItem('users'));
 		const USERNAME = sessionStorage.getItem('user');
@@ -77,12 +77,11 @@ export class Game extends Phaser.Scene {
 				* To play intermediate, at least 10 fish must be caught in beginner
 				* To play advanced, at least 20 fish must be caught in intermediate
 			*/
-			if (
-				(text === 'INTERMEDIATE' && USER[USERNAME].leaderboard.level_1.caught < 10) ||
-				(text === 'ADVANCED' && USER[USERNAME].leaderboard.level_2.caught < 20)
-			) {
+			if ((text === 'INTERMEDIATE' && USER[USERNAME].leaderboard['level_1'].caught < 10) ||
+				(text === 'ADVANCED' && USER[USERNAME].leaderboard['level_2'].caught < 20)) {
 				denyAccess = true;
-				this.add.text(x, y, '🔒', { fontSize: 64, color: 'black' }).setOrigin(0.5); // create the lock to show access is denied
+				/*create the lock to show access is denied*/
+				this.add.text(x, y, '🔒', { fontSize: 64, color: 'black' }).setOrigin(0.5);
 			}
 
 			if (text === 'INTERMEDIATE' && USER[USERNAME].leaderboard.level_1.caught < 10) {
@@ -90,14 +89,24 @@ export class Game extends Phaser.Scene {
 					fontSize: 32,
 					color: 'red',
 					backgroundColor: 'black'
-				}).setOrigin(0.5); // create the lock to show access is denied
+				}).setOrigin(0.5); // show constraint for level 2
 			} else if (text === 'ADVANCED' && USER[USERNAME].leaderboard.level_2.caught < 20) {
 				this.add.text(x, y+200, 'You need to\ncatch 20 fish\nto unlock\nthis area', {
 					fontSize: 32,
 					color: 'red',
 					backgroundColor: 'black'
-				}).setOrigin(0.5); // create the lock to show access is denied
+				}).setOrigin(0.5); // show constrain for level 3
 			}
+
+			/*show number of fish caught for the level*/
+			this.add.text(x, y-200,
+				'FISH CAUGHT:\n' + USER[USERNAME].leaderboard[level].caught,
+				{
+					fontSize: 32,
+					color: 'red',
+					backgroundColor: 'black'
+				}
+			).setOrigin(0.5);
 		}
 
 		if (denyAccess) // if access is denied, skip applying animation on pointer event

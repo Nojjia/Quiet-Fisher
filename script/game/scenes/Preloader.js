@@ -104,8 +104,5 @@ export class Preloader extends Phaser.Scene {
 		});
 
 	}
-
-	update() {
-	}
 }
 

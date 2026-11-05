@@ -1,8 +1,6 @@
 "use strict";
 
 export class MainMenu extends Phaser.Scene {
-	player;
-	boundary;
 	constructor() {
 		super({ key: 'MainMenu' });
 	}
@@ -51,8 +49,5 @@ export class MainMenu extends Phaser.Scene {
 				});
 			}
 		}
-	}
-
-	update() {
 	}
 }

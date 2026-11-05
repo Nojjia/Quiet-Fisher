@@ -42,6 +42,8 @@ body {
 	flex-flow: column nowrap;
 	justify-content: space-between;
 	align-items: center;
+
+	background-color: var(--w-bg);
 }
 
 /*
@@ -61,6 +63,21 @@ body {
 		width: 100px;
 		height: 100px;
 	}
+
+	table#card {
+		margin-top: 2rem;
+		tr td {
+			color: var(--sky-blue);
+			padding: 2rem 1rem 2rem 1rem;
+			.button {
+				background-color: var(--dark-blue);
+			}
+			.button:hover {
+				background-image: linear-gradient(to left, var(--dark-blue), var(--w-bg-offset));
+			}
+		}
+	}
+
 	#card {
 		min-width: 100px;
 	
@@ -72,6 +89,7 @@ body {
 	
 		transition: filter 0.3s ease;
 	}
+	#card:hover { filter: drop-shadow(0px 0px 10px #001a03ff); }
 }
 
 /*General styling for all buttons*/

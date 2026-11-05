@@ -223,7 +223,7 @@ export class AreaAdvanced extends Phaser.Scene {
 		});
 
 		let mistakeCount = 0;
-		let showMistakes = this.add.text(10, 300, '0', {
+		let showMistakes = this.add.text(10, 300, 'Mistakes: 0', {
 			fontSize: 40,
 			color: 'red',
 			backgroundColor: 'black'
@@ -302,7 +302,8 @@ export class AreaAdvanced extends Phaser.Scene {
 				this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 				return;
 			}
-
+			else if (event.code === 'KeyE') {
+			}
 			else {
 				mistakeCount++;
 				showMistakes.setText('Mistakes: ' + mistakeCount);
@@ -348,11 +349,12 @@ export class AreaAdvanced extends Phaser.Scene {
 						return;
 					}
 
-					let old_score = this.user[this.username].leaderboard.level_2.score;
+						console.log("Log");
+					let old_score = this.user[this.username].leaderboard.level_3.score;
 					if (old_score > elapsed || old_score === null)
-						this.user[this.username].leaderboard.level_2.score = Math.floor(elapsed);
+						this.user[this.username].leaderboard.level_3.score = Math.floor(elapsed);
 
-					this.user[this.username].leaderboard.level_2.caught++;
+					this.user[this.username].leaderboard.level_3.caught++;
 
 					localStorage.setItem('users', JSON.stringify(this.user));
 				} else if (this.time.now - elapsedFiveSecs >= DIFFICULTY_SETTER) {

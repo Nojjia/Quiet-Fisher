@@ -25,74 +25,124 @@ main#main
 				div#password-issue
 			a#link-left
 			a#link-right
-			button#login
-			button#signup
+			button.button{#login,#signup}
+*/
+
+/*
+ * #account has a max-width of 500px and left+right margin of 40px
+ * #account is a gridbox 4 rows and 2 columns(merged to one for title, input-area and submit
+ * #title
+	* #title is placed in the grid-area 'title' of #account
+	* #title is aligned to center, and has font config: size 2rem and beight bold
+ * #input-area
+	* #input-area is placed in the grid-area 'input-area of #account
+	* all text in #input-area has font-size of 2rem
+	* .constraint is shown in signup.html, for username, the text is made small
+ * #link-left and #link-right are placed in grid area of #account 'link-left' and 'link-right' respectively
+	* #link={left,right} are aligned o left and right of their containers respectively
+ * #submit is a button with fixed width, and some margin at top and bottom and auto margin to center it on left and right
 */
 #account {
 	max-width: 500px;
+	margin: 0 40px;
 
+	/*gridbox, with 4 rows 2 columns
+	|------------------------|
+	|         title          |
+	|------------------------|
+	|       input-area       |
+	|------------------------|
+	| link-left | link-right |
+	|------------------------|
+	|         submit         |
+	|------------------------|*/
 	display: grid;
 	grid-template-areas:
 		"title title"
-		"input-area input-area"
+		"input input"
 		"link-left link-right"
 		"submit submit";
 	grid-template-columns: 1fr 1fr;
 
-	margin: 0 40px;
-
 	#title {
+		/*place in title gird area of #account*/
 		grid-area: title;
+
 		margin-top: 36px;
 		text-align: center;
+
+		/*font config*/
 		font-size: 2rem;
 		font-weight: bold;
 	}
 	#input-area {
-		grid-area: input-area;
+		/*place in input gird area of #account*/
+		grid-area: input;
 		font-size: 2rem;
 
+		/*constaint class under username label*/
 		.constraint {
-			padding: 0;
-			margin: 0;
+			/*make it smaller, since it is not the main focus*/
 			font-size: 0.7rem;
 		}
 
+		/*input are .phone(phone holds select#phone-country+option and input#phone-number elements) are styled*/
 		input, .phone {
+			/* Include padding in calculation of dimensions*/
 			box-sizing: border-box;
+			/*Take entire available width of parent container, but have fixed height of 80px*/
 			width: 100%;
 			height: 80px;
+
+			/*offset 15px from top and add padding to left and right of 1rem*/
 			margin-top: 15px;
+			padding: 0 1rem;
+
+			/*have no border, but round corners*/
 			border: none;
 			border-radius: 10px;
+
 			font-size: 1.5rem;
 			background-color: var(--w-bg);
-			padding: 0 1rem;
 		}
+		/*style the placeholder text inside input elements*/
 		input::placeholder { color: var(--w-bg-offset); }
+		/*style the border of input elements currently focused on*/
 		input:focus { border: none; outline: 2px solid var(--w-fg); }
 
+		/*individual styling of .phone, to Overwrite some of the rules from above styling*/
 		.phone {
+			/*.phone is a flexbox row*/
 			display: flex;
 			flex-flow: row nowrap;
-			background-color: unset;
 			justify-content: space-between;
-			padding: 0;
 
+			/*set padding between #phone-country and #phone-number to 0*/
+			padding: 0;
+			/*remove background color to see background color of #card*/
+			background-color: unset;
+
+			/*style the select#phone-country element*/
 			#phone-country {
-				background-color: var(--w-bg);
 				width: 100px;
+				padding: 0 0.5rem;
+				margin-right: 1rem;
+
 				border-radius: 10px;
 				border: none;
 
-				padding: 0 0.5rem;
-				margin-right: 1rem;
 				font-size: 1rem;
+				background-color: var(--w-bg);
 			}
 
+			/*style the select#phone-number element*/
 			#phone-number { margin-top: 0; }
 		}
 
+		/*
+		 * password-issue mainly shows issues encountered when registering or logging in
+		 * So we make the font color red to show error and align to right for asthetics
+		*/
 		#password-issue {
 			text-align: right;
 			font-size: 1rem;
@@ -100,17 +150,21 @@ main#main
 		}
 	}
 
+	/*place in grid area link-left and link-right respectively*/
+	/*align each to left and right as per their id name, give a top margin and make color goldish*/
 	#link-left, #link-right { margin-top: 15px; color: #ffc400ff; }
 	#link-left { text-align: left; grid-area: link-left; }
 	#link-right { text-align: right; grid-area: link-right; }
 
+	/*place in grid area submit*/
 	.submit {
 		grid-area: submit;
+
 		width: 160px;
 		height: 70px;
-		display: inline-block;
 		margin: 15px auto 36px auto;
+
+		display: inline-block;
 	}
 }
 
-#card:hover { filter: drop-shadow(0px 0px 10px #001a03ff); }

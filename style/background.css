@@ -19,7 +19,6 @@ img#cloud-4
  * #background is at the bottom of the z stack, hence zindex 0
  * #background is positioned fixed to the top left corner with 0 offset
  * #background maintains 100% of inner screen dimensions
- * Background color --w-bg from colors.css
  * #background is a flexbox column(vertical flow) with space-between horizontal alignment
 	* .row is a flexbox row(horizontal flow) vertically aligned to center and space-between Horizontally
 		* .item is a div with a background image declared in css
@@ -38,8 +37,6 @@ img#cloud-4
 	/*100% of body dimensions*/
 	width: 100%;
 	height: 100%;
-
-	background-color: var(--w-bg);
 
 	/*flexbox column, vertical flow*/
 	display: flex;

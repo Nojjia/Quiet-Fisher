@@ -114,6 +114,25 @@ function init(level) {
 			timeDiv.textContent = user.time;
 		}
 
+		/*If user reached, is the currently logged in user
+			* anchor it to top of screen below navbar
+			* make it above all elements in z stack(1 for all elements, 0 #background and #cloud-{1,2,3,4} but below navbar (zindex 3)
+			* if user is low on leaderboard, no anchoring will be done
+		*/
+		if (user.username === sessionStorage.getItem('user')) {
+			row.style.backgroundColor = 'blue';
+			row.style.position = 'sticky';
+			row.style.top = '5em';
+			row.style.zIndex = '2';
+			row.style.right = '0';
+			row.addEventListener('mouseover', () => {
+				row.style.backgroundColor = 'darkblue';
+			});
+			row.addEventListener('mouseout', () => {
+				row.style.backgroundColor = 'blue';
+			});
+		}
+
 		/*
 			* Fill row with the index, username and time
 			* append row to table body

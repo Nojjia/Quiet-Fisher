@@ -51,7 +51,12 @@ export class Settings extends Phaser.Scene {
 		itemPanel.y += 20;
 
 		this.clearButton = this.createButton(CENTER.x, itemPanel.y, 'Clear Saved Files', 16, 16, 150, 'button', () => {
-			localStorage.removeItem(sessionStorage.user);
+			if (sessionStorage.user !== 'guest') {
+				let users = JSON.parse(localStorage.getItem('users'));
+				delete users[sessionStorage.user]
+				localStorage.users = JSON.stringify(users);
+				console.log(users);
+			}
 			sessionStorage.removeItem('user');
 			window.location.assign("index.html");
 		});

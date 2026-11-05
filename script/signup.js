@@ -54,7 +54,7 @@ function validateSignup(USER_INPUT, message) {
 		message.textContent = "FATAL ERROR!!\nUSERS RECORD DOESN'T EXIST!!\nCONTACT YOUR IT FRIEND!!";
 		return;
 	} else if (USER_INPUT.username.value === "guest") { /*check guest*/
-		msgText += "Username is invalid\n";
+		msgText += "Username guest is reserved\n";
 		anyError = true;
 	} else if (users[USER_INPUT.username.value]) { /*check exists*/
 		msgText += "*Username already in use!!\n";

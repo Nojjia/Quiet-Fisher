@@ -27,28 +27,39 @@ main#main
 /*
 */
 #leaderboard_levels {
+	/*take entire width of parent(#card)*/
 	width: 100%;
 
+	/*#leaderboard_levels is a flexbox row*/
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-evenly;
 	align-items: center;
 
+	/*clear any margin and paddings that may have been added*/
 	margin: 0;
 	padding: 0;
 
+	/*style the 3 buttons*/
 	#level_1, #level_2, #level_3 {
 		margin-top: 20px;
 
+		/*user should not be able to select their text, but the cursor should be a pointer when interating with it*/
 		user-select: none;
 		cursor: pointer;
 
+		/*create a diagonal gradient that is 2 times the height and width of buttons*/
 		background-image: linear-gradient(to bottom right, black, red, black);
 		background-size: 200% 200%;
+
+		/*add padding to give button a better form*/
 		padding: 20px;
+
+		/*round button*/
 		border-radius: 10px;
 	}
 
+	/*play animation of moving gradient on hover of buttons*/
 	#level_1:hover, #level_2:hover, #level_3:hover {
 		animation-name: gradientMoveBackground;
 		outline: 2px inset darkred;
@@ -58,53 +69,70 @@ main#main
 		animation-iteration-count: infinite;
 	}
 }
+/*move gradient from top right corner to bottom left corner*/
+@keyframes gradientMoveBackground {
+	0%, 100% { background-position: 0% 0%; }
+	50% { background-position: 100% 100%; }
+}
 
+/*#leaderboard_table holds the rankings of users and headings*/
 #leaderboard_table {
+	/*take up 100% of dimensions*/
 	width: 100%;
 	height: 100%;
+
+	/*include padding when calculating dimensions of element*/
 	box-sizing: border-box;
 	padding: 20px;
 
+	/*make it a flexbox columns*/
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
 
+	/*users should not be able to select text*/
 	user-select: none;
 
+	/*make the background-heading have a gradient of black to transparent from top to bottom*/
 	#leaderboard_heading { background-image: linear-gradient(to bottom, #00000044, transparent); }
 
+	/*style the headings of the table and rows of the table*/
 	#leaderboard_heading, .leaderboard_row {
+		/*take 100% of width of parent*/
 		width: 100%;
+
+		/*include padding in dimension calculations*/
 		box-sizing: border-box;
 		padding: 20px;
+		/*add margin of 10px at bottom of each row and heading, to seperate them*/
 		margin-bottom: 10px;
+
+		/*round borders*/
 		border-radius: 10px;
 
+		/*is a gridbox with columns: .leaderboard_index, .leaderboard_username, .leaderboard_time*/
 		display: grid;
-		grid-template-columns: 3em 400px 300px;
+		grid-template-columns: 3rem 400px 300px;
 		align-items: center;
 		justify-content: start;
 
-		.leaderboard_index { text-align: left; }
+		/*align the index and username row to left*/
+		.leaderboard_index, .leaderboard_username { text-align: left; }
 
-		.leaderboard_username { text-align: left; }
-
+		/*align the time and time title to right and give a width of 300px*/
 		.leaderboard_time, #leaderboard_time_title {
 			text-align: right;
 			width: 300px;
 		}
 
+		/*individual styling of title for username and time*/
 		#leaderboard_username_title {color: #5F9EA0;}
-
 		#leaderboard_time_title {color: #8A2BE2;}
 	}
 
+	/*every even row should have a dark, slightly transparent background*/
 	.leaderboard_row:nth-child(even) { background-color: #00000044; }
 
+	/*on hover, change opacity of background to be more opaque*/
 	.leaderboard_row:hover { background-color: #00000077; }
-}
-
-@keyframes gradientMoveBackground {
-	0%, 100% { background-position: 0% 0%; }
-	50% { background-position: 100% 100%; }
 }

@@ -227,7 +227,7 @@ export class AreaIntermediate extends Phaser.Scene {
 		});
 
 		let mistakeCount = 0;
-		let showMistakes = this.add.text(10, 300, '0', {
+		let showMistakes = this.add.text(10, 300, 'Mistakes: 0', {
 			fontSize: 40,
 			color: 'red',
 			backgroundColor: 'black'
@@ -306,7 +306,8 @@ export class AreaIntermediate extends Phaser.Scene {
 				this.currentlyFishing = false;
 				return;
 			}
-
+			else if (event.code === 'KeyE') {
+			}
 			else {
 				mistakeCount++;
 				showMistakes.setText('Mistakes: ' + mistakeCount);

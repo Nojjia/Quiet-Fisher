@@ -58,7 +58,7 @@ export class AreaBeginner extends Phaser.Scene {
 		this.anims.create({
 			key: 'walk',
 			frames: this.anims.generateFrameNumbers('player', { start: 1, end: 2 }),
-			frameRate: 4,
+			frameRate: 8,
 			repeat: -1
 		});
 		this.anims.create({
@@ -228,7 +228,7 @@ export class AreaBeginner extends Phaser.Scene {
 		});
 
 		let mistakeCount = 0;
-		let showMistakes = this.add.text(10, 300, '0', {
+		let showMistakes = this.add.text(10, 300, 'Mistakes: 0', {
 			fontSize: 40,
 			color: 'red',
 			backgroundColor: 'black'
@@ -307,7 +307,8 @@ export class AreaBeginner extends Phaser.Scene {
 				this.input.keyboard.off('keydown', CLICK_TO_CATCH);
 				return;
 			}
-
+			else if (event.code === 'KeyE') {
+			}
 			else {
 				mistakeCount++;
 				showMistakes.setText('Mistakes: ' + mistakeCount);
